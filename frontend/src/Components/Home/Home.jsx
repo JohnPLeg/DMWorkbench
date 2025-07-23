@@ -1,22 +1,36 @@
-import { NavLink } from "react-router";
-import { useState } from "react";
+import { UserContext } from "../../Context/UserContext";
+import { useState, useContext } from "react";
 import styles from './Home.module.css'
 
 function Home () {
-    const [username, setUsername] = useState('');
-    const [Passcode, setPasscode] = useState('');
+    const { user, setUser } = useContext(UserContext);
+    const [passcode, setPasscode] = useState('');
+    const [result, setResult] = useState(false);
+    const axios = require('axios').defaults;
 
     const handleUser = (e) => {
-        setUsername(e.target.value);
+        setUser(e.target.value);
     }
 
     const handlePass = (e) => {
         setPasscode(e.target.value);
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("form submitted");
+        
+        axios.post('/user', {
+            params: {
+                user: user,
+                password: passcode
+            }
+        })
+        .then(response => {
+            setResult(response);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     return (
@@ -32,7 +46,7 @@ function Home () {
                     />
                     <h3 className={styles.userInput}>Passcode</h3>
                     <input
-                        type="text"
+                        type="password"
                         placeholder="Passcode"
                         className={styles.input}
                         onChange={handlePass}
