@@ -8,6 +8,7 @@ function Chatroom() {
 
     return (
         <>
+            <h1>Welcome {user}</h1>
             <div className={styles.container}>
                 {fakeMessages.map((message, index) => (
                     <Textbox key={index} messages={message}/>

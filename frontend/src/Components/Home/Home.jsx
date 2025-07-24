@@ -1,15 +1,17 @@
 import { UserContext } from "../../Context/UserContext";
 import { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 import styles from './Home.module.css'
 
 function Home () {
-    const { user, setUser } = useContext(UserContext);
+    const { user, login, logout } = useContext(UserContext);
+    const [username, setUsername] = useState('');
     const [passcode, setPasscode] = useState('');
-    const [result, setResult] = useState(false);
-    const axios = require('axios').defaults;
+    const navigate = useNavigate();
 
     const handleUser = (e) => {
-        setUser(e.target.value);
+        setUsername(e.target.value);
     }
 
     const handlePass = (e) => {
@@ -19,14 +21,18 @@ function Home () {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        axios.post('/user', {
+        axios.post('http://localhost:3000/user', {
             params: {
-                user: user,
+                user: username,
                 password: passcode
             }
         })
         .then(response => {
-            setResult(response);
+            
+            if (response.data.loggedIn) {
+                login(username);
+                navigate('/chatroom');
+            }
         })
         .catch(error => {
             console.log(error);
