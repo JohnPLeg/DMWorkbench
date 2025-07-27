@@ -1,0 +1,14 @@
+img {
+    width: 900px;
+}
+
+.trim {
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.blur {
+    filter: blur(2px);
+}

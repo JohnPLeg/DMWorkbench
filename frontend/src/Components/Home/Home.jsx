@@ -1,6 +1,8 @@
 import { UserContext } from "../../Context/UserContext";
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom'
+import { cardInfo } from "../../Data/cardInfo";
+import Card from "../Card/Card";
 import axios from 'axios';
 import styles from './Home.module.css'
 
@@ -21,7 +23,7 @@ function Home () {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        axios.post('http://localhost:3000/user', {
+        axios.post('/user', {
             params: {
                 user: username,
                 password: passcode
@@ -40,27 +42,16 @@ function Home () {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.box}>
-                <form onSubmit={handleSubmit}>
-                    <h3 className={styles.userInput}>Username</h3>
-                    <input
-                        type="text"
-                        placeholder="Enter Username"
-                        className={styles.input}
-                        onChange={handleUser}
-                    />
-                    <h3 className={styles.userInput}>Passcode</h3>
-                    <input
-                        type="password"
-                        placeholder="Passcode"
-                        className={styles.input}
-                        onChange={handlePass}
-                    />
-                    <button className={styles.button} type="submit">Sign In</button>
-                </form>
+        <>
+            <img className={styles.banner} src="logo.png"/>
+            <div className={styles.container}>
+                <div className={styles.cards}>
+                    {cardInfo.map((card, index) => (
+                        <Card cards={card} key={card.title}/>
+                    ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
