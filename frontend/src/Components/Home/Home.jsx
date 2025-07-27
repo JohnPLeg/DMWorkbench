@@ -42,8 +42,10 @@ function Home () {
     }
 
     return (
-        <>
-            <img className={styles.banner} src="logo.png"/>
+        <div className={styles.gradient}>
+            <div className={styles.imgContainer}>
+                <img className={styles.banner} src="logo.png"/>
+            </div>
             <div className={styles.container}>
                 <div className={styles.cards}>
                     {cardInfo.map((card, index) => (
@@ -51,7 +53,7 @@ function Home () {
                     ))}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
