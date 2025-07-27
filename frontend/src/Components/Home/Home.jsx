@@ -43,8 +43,11 @@ function Home () {
 
     return (
         <div className={styles.gradient}>
-            <div className={styles.imgContainer}>
-                <img className={styles.banner} src="logo.png"/>
+            <div className={styles.bannerContainer}>
+                <h1 className={styles.banner}>DMWorkbench</h1>
+                <h3>A passion project by John Legge</h3>
+                <h2 className={styles.scrollButton} onClick={() => {window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" })}}>Begin</h2>
+                <p className={styles.downArrow}>↓</p>
             </div>
             <div className={styles.container}>
                 <div className={styles.cards}>
