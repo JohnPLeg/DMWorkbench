@@ -3,7 +3,7 @@ export const cardInfo = [
         title: "Stat Block Creator",
         description: "Use this tool to create your very own custom stat blocks",
         image: "zombieStats.png",
-        route: "/stat-block-creator"
+        route: "/stat-select"
     },
     {
         title: "Coming Soon",
