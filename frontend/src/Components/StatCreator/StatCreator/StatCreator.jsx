@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
 
-function StatTemplate() {
+function StatCreator() {
     
     return (
         <></>
     );
 }
 
-export default StatTemplate;
+export default StatCreator;

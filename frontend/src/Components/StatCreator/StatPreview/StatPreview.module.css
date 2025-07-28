@@ -1,0 +1,99 @@
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1f1f1f;
+}
+
+.btns {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    width: calc(100% - 40px);
+    z-index: 100;
+}
+
+.backContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.backContainer h1 {
+    color: white;
+    margin: 0;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.continuebtn button {
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+}
+
+.backbtn {
+    background-color: #1f1f1f;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.backbtn:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+
+input {
+    border: 1px solid white;
+    padding: 12px;
+    background-color: #1f1f1f;
+    color: white;
+    width: 100%;
+}
+
+label {
+    display: block; /* Changed from flex to block */
+    margin-bottom: 5px;
+    color: white; /* Add color for visibility */
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px; 
+}
