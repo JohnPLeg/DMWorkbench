@@ -20,7 +20,8 @@ html, body {
 }
 
 .monsterCard {
-    width: 70vw;
+    width: 15vw;
+    gap: 50px;
 }
 
 .card, .card > * {
@@ -37,7 +38,79 @@ html, body {
     display: flex;
     flex-direction: column; 
     align-items: center;
-    justify-content:space-evenly; 
+    justify-content: space-evenly; 
     height: 100vh;
     background-color: #1f1f1f;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.dropbtn {
+    background-color: white;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: 10px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.dropbtn:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdownContent {
+    position: absolute;
+    background-color: white;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    margin-top: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdownContent.show {
+    display: block;
+}
+
+.dropdownContent.hide {
+    display: none;
+}
+
+.dropdownContent a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+}
+
+.dropdownContent a:hover {
+    background-color: #ddd;
+}
+
+.dropdownContent a:first-child {
+    border-radius: 5px 5px 0 0;
+}
+
+.dropdownContent a:last-child {
+    border-radius: 0 0 5px 5px;
+}
+
+.templateContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 80vw;
 }

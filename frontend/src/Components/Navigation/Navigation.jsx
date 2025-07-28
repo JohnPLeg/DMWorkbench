@@ -9,7 +9,7 @@ function Navigation() {
   return (
     <nav className={`${isHome ? `${styles.homeNav}` : `${styles.navigation}`}`}>
       <Link to="/"  className={styles.navLink}>Home</Link>
-      <Link to="/stat-block-creator" className={styles.navLink}>Stat Blocks</Link>
+      <Link to="/stat-select" className={styles.navLink}>Stat Blocks</Link>
     </nav>
   );
 }

@@ -14,7 +14,7 @@ html, body {
 }
 
 .navigation {
-    background-color: #1f1f1f;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
