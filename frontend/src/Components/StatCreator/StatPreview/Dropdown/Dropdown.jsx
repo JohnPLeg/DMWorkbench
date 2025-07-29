@@ -4,13 +4,17 @@ import styles from './Dropdown.module.css';
 function Dropdown({ label, options, value, onChange, placeholder, name }) {
     const [isOpen, setIsOpen] = useState(false);
 
+    if (value ===  'dex') {
+        value = 'None';
+    }
+
     const handleSelect = (option) => {
         onChange(name, option);
         setIsOpen(false);
     };
 
     return (
-        <div className={styles.formGroup}>
+        <>
             <label>{label}:</label>
             <div className={styles.dropdown}>
                 <div 
@@ -37,7 +41,7 @@ function Dropdown({ label, options, value, onChange, placeholder, name }) {
                     </div>
                 )}
             </div>
-        </div>
+        </>
     );
 }
 
