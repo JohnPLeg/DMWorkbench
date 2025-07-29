@@ -1,6 +1,6 @@
 import styles from './SkillProf.module.css'
 
-function SavingProf({ monster }) {
+function SavingProf({ monster, onSkillSelection }) {
     let profSkills = [];
 
     monster.proficiencies.forEach((prof) => {
@@ -9,15 +9,11 @@ function SavingProf({ monster }) {
         }
     })
 
-    const handleClick = (e) => {
-        e.target.remove();
-    }
-
     return (
         <>
             <ul>
                 {profSkills.map((skill) => (
-                    <li onClick={handleClick} key={skill}>{skill || 'test'}</li>
+                    <li onClick={() => onSkillSelection(skill)} key={skill}>{skill || 'test'}</li>
                 ))}
             </ul>
         </>

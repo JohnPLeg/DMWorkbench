@@ -30,6 +30,7 @@ function StatPreview() {
         fetchData();
     }, [monsterUrl]);
 
+    // updates the monster object with what the user types
     const handleChange = (e) => {
         const { name, value } = e.target;
         setMonster(prevMonster => ({
@@ -38,6 +39,7 @@ function StatPreview() {
         }));
     }
 
+    // updates the dropdown to reflect the selection
     const handleDropdownChange = (name, value) => {
         setMonster(prevMonster => ({
             ...prevMonster,
@@ -45,6 +47,7 @@ function StatPreview() {
         }));
     };
 
+    // updates the state of the monster object when a saving throw prof is added
     const handleSavingProfChange = (name, value) => {
         const existingProf = monster.proficiencies.find(prof => 
             prof.proficiency.index === `saving-throw-${value.toLowerCase()}`
@@ -71,8 +74,46 @@ function StatPreview() {
         }
     };
 
+    // updates the state of the monster object when a saving skill prof is added
+    const handleSkillProfChange = (name, value) => {
+        const existingProf = monster.proficiencies.find(prof => 
+            prof.proficiency.index === `skill-${value.toLowerCase()}`
+        );
+
+        if (!existingProf) {
+            console.log('Adding new proficiency');
+            const newProficiency = {
+                value: 0,
+                proficiency: {
+                    index: `skill-${value.toLowerCase()}`,
+                    name: `Skill: ${value}`,
+                    url: `/api/2014/proficiencies/skill-${value.toLowerCase()}`
+                }
+            };
+
+            setMonster(prevMonster => {
+                const updated = {
+                    ...prevMonster,
+                    proficiencies: [...prevMonster.proficiencies, newProficiency]
+                };
+                return updated;
+            });
+        }
+    };
+
+    // removes the clicked prof from the monster object
     const handleSavingClick = (value) => {
         const indexToRemove = monster.proficiencies.findIndex(prof => prof.proficiency.index === `saving-throw-${value.toLowerCase()}`);
+
+        setMonster(prevMonster => ({
+            ...prevMonster,
+            proficiencies: prevMonster.proficiencies.filter((_, index) => index !== indexToRemove)
+        }));
+    }
+
+    // removes the clicked prof from the monster object
+    const handleSkillClick = (value) => {
+        const indexToRemove = monster.proficiencies.findIndex(prof => prof.proficiency.index === `skill-${value.toLowerCase()}`);
 
         setMonster(prevMonster => ({
             ...prevMonster,
@@ -305,7 +346,7 @@ function StatPreview() {
                                     onChange={handleSavingProfChange}
                                     placeholder="Select Saving Throw"
                                 />
-                                <SavingProf onSelection={handleSavingClick} monster={monster} />
+                                <SavingProf onSaveSelection={handleSavingClick} monster={monster} />
                             </div>
                             <div className={styles.formGroup}>
                                 <Dropdown
@@ -313,10 +354,10 @@ function StatPreview() {
                                     name="skillProf"
                                     options={skills}
                                     value={''}
-                                    onChange={handleDropdownChange}
+                                    onChange={handleSkillProfChange}
                                     placeholder="Select Skill"
                                 />
-                                <SkillProf monster={monster} />
+                                <SkillProf onSkillSelection={handleSkillClick} monster={monster} />
                             </div>
                         </div>
                     </form>

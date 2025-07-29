@@ -1,6 +1,6 @@
 import styles from './SavingProf.module.css'
 
-function SavingProf({ monster, onSelection }) {
+function SavingProf({ monster, onSaveSelection }) {
     let profThrows = [];
 
     monster.proficiencies.forEach((prof) => {
@@ -11,9 +11,9 @@ function SavingProf({ monster, onSelection }) {
 
     return (
         <>
-            <ul id={styles.savingProfList}>
+            <ul>
                 {profThrows.map((save) => (
-                    <li onClick={() => onSelection(save)} key={save}>{save || 'test'}</li>
+                    <li onClick={() => onSaveSelection(save)} key={save}>{save || 'test'}</li>
                 ))}
             </ul>
         </>
