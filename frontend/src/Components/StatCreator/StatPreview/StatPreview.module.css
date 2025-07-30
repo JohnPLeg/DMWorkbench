@@ -101,8 +101,8 @@ label {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-.partFour {
-    grid-template-columns: 1fr 1fr 1fr;
+.partFour, .partFive {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 form > label {
@@ -115,6 +115,20 @@ form > label {
     gap: 5px; 
 }
 
+.legendBox {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+.legendBox > input {
+    width: 30%;
+}
+
+.legendBox > label {
+    width: 60%;
+}
+
 ul {
     list-style: none;
     margin: 0px;
@@ -124,3 +138,9 @@ ul > * {
     margin: 10px;
     color: white;
 }
+
+textarea {
+    height: 15vh;
+    margin-top: 50px;
+}
+

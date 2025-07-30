@@ -14,6 +14,7 @@ function StatPreview() {
     const monsterUrl = (location.state.monster).replaceAll(' ','-').toLowerCase();
     const [monster, setMonster] = useState({});
     const [loading, setLoading] = useState(true);
+    const [checked, setChecked] = useState(false);
 
 
     useEffect(() => {
@@ -105,11 +106,11 @@ function StatPreview() {
             });
         }
     };
-
+    // updates the state of the monster object when a language is added
     const handleLangChange = (name, value) => {
         const langs = monster.languages.split(',').map(lang => lang.trim());
 
-        const existingLang = langs.find(lang => lang == value);
+        const existingLang = langs.find(lang => lang === value);
 
         if (!existingLang) {
             console.log('Adding new Language');
@@ -153,6 +154,10 @@ function StatPreview() {
             ...prevMonster,
             languages: langs.join(', ')
         }))
+    }
+
+    const handleCheckbox = () => {
+        checked ? setChecked(false) : setChecked(true);
     }
     
     return (
@@ -404,12 +409,31 @@ function StatPreview() {
                                 />
                                 <LangProf onLangSelection={handleLangClick} monster={monster} />
                             </div>
+                            <div className={styles.formGroup}>
+                                <div className={styles.legendBox}>
+                                    <label htmlFor="checkbox">Legendary Creature:</label>
+                                    <input id='checkbox' type="checkbox" onClick={handleCheckbox}/>
+                                </div>
+                            </div>
                         </div>
+                        <div className={styles.partSix}>
+                            <div className={styles.formGroup}>
+                                {checked ? (
+                                    <textarea
+                                        name="legendaryText"
+                                        id="legendaryText"
+                                        placeholder="Enter Legendary Text (e.g. abilities, actions, bonus actions, reactions, and legendary actions)"    
+                                    />
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
+                        </div>  
                     </form>
                 </div>
             )}
         </>
     )
 }
-//<SkillProf monster={monster}/>
+
 export default StatPreview;
