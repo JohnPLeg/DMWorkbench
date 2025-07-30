@@ -6,7 +6,8 @@ import Navigation from "../../Navigation/Navigation";
 import Dropdown from "./Dropdown/Dropdown";
 import { size, type, armorType, savingThrows, skills, conditions, damageTypes, languages, crProf, abilityScores } from "../../../Data/dropdownInfo";
 import SavingProf from "./Proficiencies/SavingProf/SavingProf";
-import SkillProf from "./Proficiencies/SkillProf/SkillProf"
+import SkillProf from "./Proficiencies/SkillProf/SkillProf";
+import LangProf from "./Proficiencies/LangProf/LangProf";
 
 function StatPreview() {
     const location = useLocation();
@@ -49,6 +50,8 @@ function StatPreview() {
 
     // updates the state of the monster object when a saving throw prof is added
     const handleSavingProfChange = (name, value) => {
+        const bonus = crProf[monster.challenge_rating] + Math.floor(((monster[value]) - 10) / 2);
+
         const existingProf = monster.proficiencies.find(prof => 
             prof.proficiency.index === `saving-throw-${value.toLowerCase()}`
         );
@@ -56,7 +59,7 @@ function StatPreview() {
         if (!existingProf) {
             console.log('Adding new proficiency');
             const newProficiency = {
-                value: 0,
+                value: bonus,
                 proficiency: {
                     index: `saving-throw-${value.toLowerCase()}`,
                     name: `Saving Throw: ${value}`,
@@ -76,6 +79,8 @@ function StatPreview() {
 
     // updates the state of the monster object when a saving skill prof is added
     const handleSkillProfChange = (name, value) => {
+        const bonus = crProf[monster.challenge_rating] + Math.floor(((monster[value]) - 10) / 2);
+
         const existingProf = monster.proficiencies.find(prof => 
             prof.proficiency.index === `skill-${value.toLowerCase()}`
         );
@@ -83,7 +88,7 @@ function StatPreview() {
         if (!existingProf) {
             console.log('Adding new proficiency');
             const newProficiency = {
-                value: 0,
+                value: bonus,
                 proficiency: {
                     index: `skill-${value.toLowerCase()}`,
                     name: `Skill: ${value}`,
@@ -100,6 +105,23 @@ function StatPreview() {
             });
         }
     };
+
+    const handleLangChange = (name, value) => {
+        const langs = monster.languages.split(',').map(lang => lang.trim());
+
+        const existingLang = langs.find(lang => lang == value);
+
+        if (!existingLang) {
+            console.log('Adding new Language');
+            
+            const newLangs = [...langs, value];
+
+            setMonster(prevMonster => ({
+                ...prevMonster,
+                languages: newLangs.join(", ")
+            }));
+        }
+    }
 
     // removes the clicked prof from the monster object
     const handleSavingClick = (value) => {
@@ -119,6 +141,18 @@ function StatPreview() {
             ...prevMonster,
             proficiencies: prevMonster.proficiencies.filter((_, index) => index !== indexToRemove)
         }));
+    }
+
+    // removes the clicked language from the monster object
+    const handleLangClick = (value) => {
+        const langs = String(monster.languages).split(',');
+        const indexToRemove = langs.findIndex(lang => lang === value);
+        langs.splice(indexToRemove, 1);
+
+        setMonster(prevMonster => ({
+            ...prevMonster,
+            languages: langs.join(', ')
+        }))
     }
     
     return (
@@ -358,6 +392,17 @@ function StatPreview() {
                                     placeholder="Select Skill"
                                 />
                                 <SkillProf onSkillSelection={handleSkillClick} monster={monster} />
+                            </div>
+                            <div className={styles.formGroup}>
+                                <Dropdown
+                                    label="Languages"
+                                    name="languages"
+                                    options={languages}
+                                    value={''}
+                                    onChange={handleLangChange}
+                                    placeholder="Select Language"
+                                />
+                                <LangProf onLangSelection={handleLangClick} monster={monster} />
                             </div>
                         </div>
                     </form>
