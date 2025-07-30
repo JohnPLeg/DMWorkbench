@@ -2,8 +2,8 @@ import Home from './Components/Home/Home'
 import StatSelect from './Components/StatCreator/StatSelect/StatSelect'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import { UserProvider } from './Context/UserContext'
-import StatCreator from './Components/StatCreator/StatCreator/StatCreator'
 import StatPreview from './Components/StatCreator/StatPreview/StatPreview'
+import StatCreator from './Components/StatCreator/StatEditor/StatEditor'
 
 function App() {
 
@@ -16,6 +16,7 @@ function App() {
             <Route path='stat-select' element={<StatSelect/>}/>
             <Route path='stat-creator' element={<StatCreator/>}/>
             <Route path='stat-creator/preview' element={<StatPreview/>}/>
+            <Route path='stat-creator/editor' element={<StatCreator/>}/>
           </Routes>
         </UserProvider>
       </BrowserRouter>

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import styles from './StatPreview.module.css'
@@ -10,6 +10,7 @@ import SkillProf from "./Proficiencies/SkillProf/SkillProf";
 import LangProf from "./Proficiencies/LangProf/LangProf";
 
 function StatPreview() {
+    const navigate = useNavigate();
     const location = useLocation();
     const monsterUrl = (location.state.monster).replaceAll(' ','-').toLowerCase();
     const [monster, setMonster] = useState({});
@@ -35,6 +36,7 @@ function StatPreview() {
     // updates the monster object with what the user types
     const handleChange = (e) => {
         const { name, value } = e.target;
+
         setMonster(prevMonster => ({
             ...prevMonster,
             [name]: value
@@ -159,6 +161,12 @@ function StatPreview() {
     const handleCheckbox = () => {
         checked ? setChecked(false) : setChecked(true);
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        navigate('/stat-creator/editor', { state: { monster }})
+    }
     
     return (
         <>
@@ -174,10 +182,10 @@ function StatPreview() {
                             <button className={styles.backbtn}>Back</button>
                         </div>
                         <div className={styles.continuebtn}>
-                            <button>Continue</button>
+                            <button type="submit" form="statForm" >Continue</button>
                         </div>      
                     </div>
-                    <form>
+                    <form id='statForm' method='POST' onSubmit={handleSubmit}>
                         <div className={styles.partOne}>
                             <div className={styles.formGroup}>
                                 <label htmlFor="name">Name:</label>

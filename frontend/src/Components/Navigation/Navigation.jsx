@@ -7,7 +7,7 @@ function Navigation() {
   const isHome = location.pathname === '/';
 
   return (
-    <nav className={`${isHome ? `${styles.homeNav}` : `${styles.navigation}`}`}>
+    <nav className={styles.homeNav}>
       <Link to="/"  className={styles.navLink}>Home</Link>
       <Link to="/stat-select" className={styles.navLink}>Stat Blocks</Link>
     </nav>
