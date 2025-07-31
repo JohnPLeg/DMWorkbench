@@ -126,7 +126,7 @@ label {
 }
 
 
-form > label {
+form > label, .addBtn > label {
     font-size: 25px;
 }
 
@@ -174,5 +174,19 @@ ul > * {
 textarea {
     height: 15vh;
     margin-top: 50px;
+}
+
+.addBtn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.addBtn > button {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #248f24;
+    color: white;
+    width: 7%;
 }
 

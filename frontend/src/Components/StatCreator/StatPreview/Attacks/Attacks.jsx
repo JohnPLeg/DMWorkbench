@@ -71,7 +71,7 @@ function Attacks({ monster, setMonster }) {
                     </div>
                     <br />
                     <br />
-                    {act.actions.map((attack, attackIndex) => (
+                    { act.actions ? act.actions.map((attack, attackIndex) => (
                         <div key={attackIndex} className={styles.indent}>
                             <div className={styles.formGroup}>
                                 <label>Attack Name:</label>
@@ -101,7 +101,7 @@ function Attacks({ monster, setMonster }) {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )) : <></>}
                 </React.Fragment>
             ))}
         </>

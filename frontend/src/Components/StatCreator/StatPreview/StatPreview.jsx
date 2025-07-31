@@ -257,6 +257,51 @@ function StatPreview() {
         }
     }
 
+    const handleAddActionClick = () => {
+        const blankAction = {
+            name: '',
+            desc: '',
+            attack_bonus: 0
+        }
+
+        setMonster(prevMonster => ({
+            ...prevMonster,
+            actions: [...prevMonster.actions, blankAction]
+        }))
+    }
+
+    const handleAddMultiClick = () => {
+         if (!monster.actions.find(obj => obj.name === 'Multiattack')) {
+            const blankMulti = {
+                name: 'Multiattack',
+                desc: '',
+                actions: [{}]
+            }
+
+            setMonster(prevMonster => ({
+                ...prevMonster,
+                actions: [blankMulti, ...prevMonster.actions]
+            }))  
+        } else {
+            const blankAction = {
+                name: '',
+                desc: '',
+            }
+
+            setMonster(prevMonster => {
+                const newActions = [...prevMonster.actions];
+                const lastActionIndex = newActions.length - 1;
+                
+                newActions[lastActionIndex] = {
+                    ...newActions[lastActionIndex],
+                    actions: [...newActions[lastActionIndex].actions, blankAction]
+                };
+                
+                return { ...prevMonster, actions: newActions };
+            });
+        }
+    }
+
     const handleCheckbox = () => {
         checked ? setChecked(false) : setChecked(true);
     }
@@ -278,7 +323,7 @@ function StatPreview() {
                 <div className={styles.mainContainer}>
                     <div className={styles.btns}>
                         <div className={styles.backContainer}>
-                            <button className={styles.backbtn}>Back</button>
+                            <button className={styles.backbtn} onCLick={() => console.log(monster.actions)}>Back</button>
                         </div>
                         <div className={styles.continuebtn}>
                             <button type="submit" form="statForm" >Continue</button>
@@ -625,7 +670,11 @@ function StatPreview() {
                                 />
                             </div>
                         </div>
-                        <label>Actions:</label>
+                        <div className={styles.addBtn}>
+                            <label>Actions:</label>
+                            <button type="button" onClick={handleAddMultiClick}>Add Multiatack</button>
+                            <button type="button" onClick={handleAddActionClick}>Add Action</button>
+                        </div>
                         <div className={styles.partSeven}>
                             <Attacks monster={monster} setMonster={setMonster}/>
                         </div>
