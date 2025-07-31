@@ -1,3 +1,5 @@
+import styles from './LangProf.module.css'
+
 function LangProf({ monster, onLangSelection }) {
     const langs = String(monster.languages).split(',');
 

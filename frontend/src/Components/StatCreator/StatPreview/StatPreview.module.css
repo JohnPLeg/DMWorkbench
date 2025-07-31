@@ -1,3 +1,7 @@
+body {
+    background-color: #1f1f1f;
+}
+
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
@@ -88,12 +92,16 @@ label {
     color: white;
 }
 
-.partOne, .partTwo, .partThree, .partFour {
+.buttonGrid, .partOne, .partTwo, .partThree, .partFour, .partFive, .partSix, .partSeven {
     display: grid;
     gap: 20px;
 }
 
-.partOne, .partThree {
+.partOne {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.partThree {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
@@ -101,9 +109,22 @@ label {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-.partFour, .partFive {
+.partFour, .partSix {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
+.partFive {
+    grid-template-columns: 1fr 1fr;
+}
+
+.buttonGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.vulnGrid {
+    text-align: center;
+}
+
 
 form > label {
     font-size: 25px;
@@ -136,6 +157,17 @@ ul {
 
 ul > * {
     margin: 10px;
+    color: white;
+}
+
+.vulnGrid > ul {
+    padding: 0px;
+}
+
+.vulnGrid > button {
+    border: 1px solid white;
+    padding: 12px;
+    background-color: #1f1f1f;
     color: white;
 }
 
