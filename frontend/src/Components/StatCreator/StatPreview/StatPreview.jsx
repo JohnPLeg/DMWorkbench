@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import styles from './StatPreview.module.css'
 import Navigation from "../../Navigation/Navigation";
-import Dropdown from "./Dropdown/Dropdown";
-import { savingThrows, skills, conditions, damageTypes, languages, crProf, abilityScores } from "../../../Data/dropdownInfo";
-
 import BasicInfo from "./BasicInfoSection/BasicInfo";
 import SpeedSection from "./SpeedSection/SpeedSection";
 import AbilityScores from "./AbilityScoreSection/AbilityScores";

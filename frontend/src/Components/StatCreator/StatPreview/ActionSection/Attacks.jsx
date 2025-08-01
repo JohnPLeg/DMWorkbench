@@ -78,8 +78,9 @@ function Attacks({ monster, setMonster }) {
                     <div className={styles.indent}>
                         <div className={styles.formGroup}>
                             <label>Description:</label>
-                            <input
-                                type="text"
+                            <textarea
+                                rows={3}
+                                columns={10}
                                 value={act.desc}
                                 onChange={(e) => handleDescChange(act, e.target.value)}
                             />

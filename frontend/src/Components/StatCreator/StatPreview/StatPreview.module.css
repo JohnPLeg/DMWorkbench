@@ -11,6 +11,8 @@ body {
   height: 120px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @keyframes spin {
@@ -85,12 +87,16 @@ button {
     background-color: #333;
 }
 
-input {
+input, textarea {
     border: 1px solid white;
     padding: 12px;
     background-color: #1f1f1f;
     color: white;
     width: 100%;
+}
+
+textarea {
+    resize: none;
 }
 
 label {
@@ -176,11 +182,6 @@ ul > * {
     padding: 12px;
     background-color: #1f1f1f;
     color: white;
-}
-
-textarea {
-    height: 15vh;
-    margin-top: 50px;
 }
 
 .addBtn {
