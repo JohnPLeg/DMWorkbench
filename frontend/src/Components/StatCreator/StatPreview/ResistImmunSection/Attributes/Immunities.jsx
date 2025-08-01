@@ -6,7 +6,7 @@ function Immunities({ monster, onDamageSelection }) {
         <>
             <ul>
                 {monster.damage_immunities.map((resist) => (
-                    <li onClick={() => onVulnSelection(resist)} key={resist}>{resist || 'test'}</li>
+                    <li onClick={() => onDamageSelection(resist)} key={resist}>{resist || 'test'}</li>
                 ))}
             </ul>
         </>
