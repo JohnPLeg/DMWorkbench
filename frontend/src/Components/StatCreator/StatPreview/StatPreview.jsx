@@ -140,7 +140,7 @@ function StatPreview() {
                         </div>
                         <div className={styles.addBtn}>
                             <label>Actions:</label>
-                            <button type="button" onClick={handleAddMultiClick}>Add Multiatack</button>
+                            <button type="button" onClick={handleAddMultiClick}>Add Multiattack</button>
                             <button type="button" onClick={handleAddActionClick}>Add Action</button>
                         </div>
                         <div className={styles.partSeven}>

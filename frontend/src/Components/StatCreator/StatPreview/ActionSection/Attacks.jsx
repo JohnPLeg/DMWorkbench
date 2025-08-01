@@ -1,4 +1,5 @@
-import styles from './Attacks.module.css'
+import styles from './Attacks.module.css';
+
 import React from 'react';
 
 function Attacks({ monster, setMonster }) {
@@ -40,6 +41,21 @@ function Attacks({ monster, setMonster }) {
         }));
     };
 
+    const handleRemoveMulti = (attackIndex) => {
+        if (monster.actions[0].actions[attackIndex]) {
+            setMonster(prevMonster => {
+                const newMulti = [...prevMonster.actions];
+
+                newMulti[0] = {
+                    ...newMulti[0],
+                    actions: newMulti[0].actions.filter((_, index) => index !== attackIndex)
+                }
+                
+                return {...prevMonster, actions: newMulti}
+            });
+        }
+    };
+
     return (
         <>
             {actionList.map((act, actIndex) => (
@@ -74,12 +90,19 @@ function Attacks({ monster, setMonster }) {
                     { act.actions ? act.actions.map((attack, attackIndex) => (
                         <div key={attackIndex} className={styles.indent}>
                             <div className={styles.formGroup}>
-                                <label>Attack Name:</label>
-                                <input
-                                    type="text"
-                                    value={attack.action_name}
-                                    onChange={(e) => handleAttackChange(actIndex, attackIndex, { action_name: e.target.value })}
-                                />
+                                <div className={styles.btnContainer}>
+                                    <label>Attack Name:</label>
+                                    <input
+                                        type="text"
+                                        value={attack.action_name}
+                                        onChange={(e) => handleAttackChange(actIndex, attackIndex, { action_name: e.target.value })}
+                                    />
+                                    <button 
+                                        type="button"
+                                        onClick={() => handleRemoveMulti(attackIndex)}
+                                        className={styles.removeButton}
+                                    >X</button>
+                                </div>
                             </div>
                             <br />
                             <div className={styles.indent}>
