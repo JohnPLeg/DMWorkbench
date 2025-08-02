@@ -1,35 +1,47 @@
 import styles from './StatSelect.module.css'
-import { templateInfo } from '../../../Data/templateInfo';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '../../Navigation/Navigation';
+import axios from 'axios';
 
 function StatSelect() {
+    const [templateInfo, setTemplateInfo] = useState({});
     const [template, setTemplate] = useState(false);
-    const [openDropdown, setOpenDropdown] = useState(null);
+    const [openDropdown, setOpenDropdown] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('https://www.dnd5eapi.co/api/2014/monsters')
+                setTemplateInfo(res.data.results);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const toggleDropdown = (letter) => {
+        setOpenDropdown(openDropdown === letter ? '' : letter);
+    }
     
-    function dropdown(letter) {
-        const isOpen = openDropdown === letter;
-        
+    function renderDropdown(letter) {
+        if (!letter || openDropdown !== letter) return null
+
         return (
             <div className={styles.monsterCard} key={letter}>
                 <div className={styles.dropdown}>
-                    <button 
-                        className={styles.dropbtn} 
-                        onClick={() => setOpenDropdown(isOpen ? null : letter)}
-                    >
-                        {letter} {isOpen ? '▲' : '▼'}
-                    </button>
-                    <div className={`${styles.dropdownContent} ${isOpen ? styles.show : styles.hide}`}>
+                    <div className={styles.dropdownContent}>
                         {templateInfo.map((monster, index) => {
-                            if (monster[0] === letter) {
+                            if (monster.name[0] === letter) {
                                 return (
                                     <a 
-                                        onClick={() => navigate('/stat-creator/preview', {state: { monster: `${monster}`}})} 
-                                        key={monster}
+                                        onClick={() => navigate('/stat-creator/preview', {state: { monsterUrl: monster.url}})} 
+                                        key={monster.name}
                                     >
-                                        {monster}
+                                        {monster.name}
                                     </a>
                                 )
                             }
@@ -47,8 +59,11 @@ function StatSelect() {
             {template ? (
                 <div className={styles.container}>
                     <div className={styles.templateContainer}>
-                        {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'].map(letter => dropdown(letter))}
+                        {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'].map(letter => 
+                            <button key={letter} onClick={() => toggleDropdown(letter)}>{letter}</button>
+                        )}
                     </div>
+                    {renderDropdown(openDropdown)}
                 </div>
             ) : (
                 <div className={styles.container}>

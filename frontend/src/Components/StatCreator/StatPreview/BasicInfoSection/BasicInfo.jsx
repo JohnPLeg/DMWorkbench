@@ -29,7 +29,7 @@ function BasicInfo({ monster, setMonster }) {
                     type="text"
                     name='name'
                     id='name'
-                    value={monster.name || ''}
+                    value={monster?.name || ''}
                     onChange={handleChange}
                     placeholder="Name"
                 />
@@ -39,7 +39,7 @@ function BasicInfo({ monster, setMonster }) {
                     label="Size"
                     name="size"
                     options={size}
-                    value={monster.size}
+                    value={monster?.size}
                     onChange={handleDropdownChange}
                     placeholder="Select Size"
                 />
@@ -49,7 +49,7 @@ function BasicInfo({ monster, setMonster }) {
                     label="Type"
                     name="type"
                     options={type}
-                    value={monster.type}
+                    value={monster?.type}
                     onChange={handleDropdownChange}
                     placeholder="Select Type"
                 />
@@ -60,7 +60,7 @@ function BasicInfo({ monster, setMonster }) {
                     type="text"
                     name='alignment'
                     id='alignment'
-                    value={monster.alignment || ''}
+                    value={monster?.alignment || ''}
                     onChange={handleChange}
                     placeholder="Alignment"
                 />
@@ -71,7 +71,7 @@ function BasicInfo({ monster, setMonster }) {
                     type="text"
                     name='hit_dice'
                     id='hit_dice'
-                    value={monster.hit_dice || ''}
+                    value={monster?.hit_dice || ''}
                     onChange={handleChange}
                     placeholder="0"
                 />
@@ -82,7 +82,7 @@ function BasicInfo({ monster, setMonster }) {
                     type="text"
                     name='hit_points'
                     id='hit_points'
-                    value={monster.hit_points || ''}
+                    value={monster?.hit_points || ''}
                     onChange={handleChange}
                     placeholder="0"
                 />
@@ -92,7 +92,7 @@ function BasicInfo({ monster, setMonster }) {
                     label="Armor Type"
                     name="armorType"
                     options={armorType}
-                    value={monster.armor_class[0].type}
+                    value={monster.armor_class?.[0]?.type}
                     onChange={handleDropdownChange}
                     placeholder="Select Armor Type"
                 />

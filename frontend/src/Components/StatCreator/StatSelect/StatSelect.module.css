@@ -20,12 +20,15 @@ html, body {
 }
 
 .monsterCard {
-    width: 15vw;
+    width: 35vw;
     gap: 50px;
+    padding: 0;
+    height: 500px;
 }
 
 .card, .card > * {
     background-color: white;
+    margin-bottom: 50px;
 }
 
 .card:hover {
@@ -38,10 +41,11 @@ html, body {
     display: flex;
     flex-direction: column; 
     align-items: center;
-    justify-content: space-evenly; 
-    height: 100vh;
+    height: 100%;
     background-color: #1f1f1f;
+    margin-top: 200px;
 }
+
 
 .dropdown {
     position: relative;
@@ -67,15 +71,14 @@ html, body {
 }
 
 .dropdownContent {
-    position: absolute;
-    background-color: white;
     min-width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 5px;
-    margin-top: 5px;
-    max-height: 300px;
-    overflow-y: auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid white;
+    padding: 12px;
+    background-color: transparent;
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
 .dropdownContent.show {
@@ -93,6 +96,7 @@ html, body {
     display: block;
     cursor: pointer;
     font-family: 'Raleway', sans-serif;
+    color: white;
 }
 
 .dropdownContent a:hover {
@@ -109,8 +113,14 @@ html, body {
 
 .templateContainer {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    padding: 20px;
-    max-width: 80vw;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 0px;
+    width: 35vw;
+}
+
+.templateContainer button {
+    border: 1px solid white;
+    padding: 12px;
+    background-color: #1f1f1f;
+    color: white;
 }

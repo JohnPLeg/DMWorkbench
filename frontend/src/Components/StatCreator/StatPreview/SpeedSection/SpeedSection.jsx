@@ -22,7 +22,7 @@ function SpeedSection({ monster, setMonster }) {
                     type="text"
                     name='walk'
                     id='speed'
-                    value={monster.speed.walk || ''}
+                    value={monster.speed?.walk || ''}
                     onChange={handleChange}
                     placeholder="0 ft"
                 />
@@ -33,7 +33,7 @@ function SpeedSection({ monster, setMonster }) {
                     type="text"
                     name='burrow'
                     id='burrow'
-                    value={monster.speed.burrow || ''}
+                    value={monster.speed?.burrow || ''}
                     onChange={handleChange}
                     placeholder="0 ft."
                 />
@@ -44,7 +44,7 @@ function SpeedSection({ monster, setMonster }) {
                     type="text"
                     name='climb'
                     id='climbSpeed'
-                    value={monster.speed.climb || ''}
+                    value={monster.speed?.climb || ''}
                     onChange={handleChange}
                     placeholder="0 ft."
                 />
@@ -55,7 +55,7 @@ function SpeedSection({ monster, setMonster }) {
                     type="text"
                     name='fly'
                     id='flySpeed'
-                    value={monster.speed.fly || ''}
+                    value={monster.speed?.fly || ''}
                     onChange={handleChange}
                     placeholder="0 ft."
                 />
@@ -66,7 +66,7 @@ function SpeedSection({ monster, setMonster }) {
                     type="text"
                     name='swim'
                     id='swimSpeed'
-                    value={monster.speed.swim || ''}
+                    value={monster.speed?.swim || ''}
                     onChange={handleChange}
                     placeholder="0 ft."
                 />

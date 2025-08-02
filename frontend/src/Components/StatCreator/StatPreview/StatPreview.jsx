@@ -14,7 +14,6 @@ import Attacks from "./ActionSection/Attacks";
 function StatPreview() {
     const navigate = useNavigate();
     const location = useLocation();
-    const monsterUrl = (location.state.monster).replaceAll(' ','-').toLowerCase();
     const [monster, setMonster] = useState({});
     const [loading, setLoading] = useState(true);
     const [checked, setChecked] = useState(false);
@@ -23,7 +22,7 @@ function StatPreview() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`https://www.dnd5eapi.co/api/2014/monsters/${monsterUrl}`)
+                const res = await axios.get(`https://www.dnd5eapi.co${location.state.monsterUrl}`)
                 setMonster(res.data);
             } catch (err) {
                 console.log(err);
@@ -33,7 +32,7 @@ function StatPreview() {
         };
 
         fetchData();
-    }, [monsterUrl]);
+    }, []);
 
     const handleAddActionClick = () => {
         const blankAction = {
@@ -101,7 +100,7 @@ function StatPreview() {
                 <div className={styles.mainContainer}>
                     <div className={styles.btns}>
                         <div className={styles.backContainer}>
-                            <button className={styles.backbtn} onClick={() => console.log(monster.actions)}>Back</button>
+                            <button className={styles.backbtn} onClick={() => navigate('/stat-select')}>Back</button>
                         </div>
                         <div className={styles.continuebtn}>
                             <button type="submit" form="statForm" >Continue</button>
