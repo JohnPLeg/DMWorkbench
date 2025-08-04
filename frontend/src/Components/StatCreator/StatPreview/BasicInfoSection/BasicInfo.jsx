@@ -97,6 +97,17 @@ function BasicInfo({ monster, setMonster }) {
                     placeholder="Select Armor Type"
                 />
             </div>
+            <div className={styles.formGroup}>
+                <label htmlFor="name">Challenge Rating:</label>
+                <input 
+                    type="text"
+                    name='name'
+                    id='name'
+                    value={monster?.challenge_rating || ''}
+                    onChange={handleChange}
+                    placeholder="Name"
+                />
+            </div>
         </>
     )
 }
