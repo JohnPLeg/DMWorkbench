@@ -4,15 +4,22 @@ import Navigation from "../../Navigation/Navigation";
 
 function StatCreator() {
     const location = useLocation();
-    const { monster } = location.state;
+    const { monster, legText } = location.state;
 
-    const calcMod = () => {
-    }
+    
     
     return (
         <div className={styles.statCreator}>
             <Navigation/>
             <div className={styles.mainContainer}>
+                <div className={styles.btns}>
+                    <div className={styles.backContainer}>
+                        <button className={styles.backbtn} onClick={() => navigate('/stat-select')}>Back</button>
+                    </div>
+                    <div className={styles.continuebtn}>
+                        <button>Continue</button>
+                    </div>      
+                </div>
                 <div className={styles.statBlockWrapper}>
                     <div className={styles.statBlock}>
                         <hr className={styles.border}/>
@@ -43,27 +50,57 @@ function StatCreator() {
                                 <div className={styles.scores}>
                                     <div className={styles.strength}>
                                         <h4>STR</h4>
-                                        <p>{monster.strength} (+{calcMod()})</p>
+                                        <p>{monster.strength} ({Math.floor((monster.strength - 10) / 2) >= 0 ? (
+                                            `+${Math.floor((monster.strength - 10) / 2)}`
+                                            ) : (
+                                                Math.floor((monster.strength - 10) / 2)
+                                            )})
+                                        </p>
                                     </div>
                                     <div className={styles.dexterity}>
                                         <h4>DEX</h4>
-                                        <p>{monster.dexterity} (+{calcMod()})</p>
+                                        <p>{monster.dexterity} ({Math.floor((monster.dexterity - 10) / 2) >= 0 ? (
+                                            `+${Math.floor((monster.dexterity - 10) / 2)}`
+                                            ) : (
+                                                Math.floor((monster.dexterity - 10) / 2)
+                                            )})
+                                        </p>
                                     </div>
                                     <div className={styles.constitution}>
                                         <h4>CON</h4>
-                                        <p>{monster.constitution} (+{calcMod()})</p>
+                                        <p>{monster.constitution} ({Math.floor((monster.constitution - 10) / 2) >= 0 ? (
+                                            `+${Math.floor((monster.constitution - 10) / 2)}`
+                                            ) : (
+                                                Math.floor((monster.constitution - 10) / 2)
+                                            )})
+                                        </p>
                                     </div>
                                     <div className={styles.intelligence}>
                                         <h4>INT</h4>
-                                        <p>{monster.intelligence} (+{calcMod()})</p>
+                                        <p>{monster.intelligence} ({Math.floor((monster.intelligence - 10) / 2) >= 0 ? (
+                                            `+${Math.floor((monster.intelligence - 10) / 2)}`
+                                            ) : (
+                                                Math.floor((monster.intelligence - 10) / 2)
+                                            )})
+                                        </p>
                                     </div>
                                     <div className={styles.wisdom}>
                                         <h4>WIS</h4>
-                                        <p>{monster.wisdom} (+{calcMod()})</p>
+                                        <p>{monster.wisdom} ({Math.floor((monster.wisdom - 10) / 2) >= 0 ? (
+                                            `+${Math.floor((monster.wisdom - 10) / 2)}`
+                                            ) : (
+                                                Math.floor((monster.wisdom - 10) / 2)
+                                            )})
+                                        </p>
                                     </div>
                                     <div className={styles.charisma}>
                                         <h4>CHA</h4>
-                                        <p>{monster.charisma} (+{calcMod()})</p>
+                                        <p>{monster.charisma} ({Math.floor((monster.charisma - 10) / 2) >= 0 ? (
+                                            `+${Math.floor((monster.charisma - 10) / 2)}`
+                                            ) : (
+                                                Math.floor((monster.charisma - 10) / 2)
+                                            )})
+                                        </p>
                                     </div>
                                 </div>    
                                 <svg height='5' width="100%" className={styles.rule}>
@@ -93,7 +130,37 @@ function StatCreator() {
                             </svg>
                             <div className={styles.actions}>
                                 <div className={styles.traitsListLeft}>
-
+                                    {monster.special_abilities.map((ability) => (
+                                        <div key={ability.name} className={styles.inlineText}>
+                                            <div>
+                                                <h4>{ability.name}.</h4>
+                                                <p>{ability.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className={styles.traitsListLeft}>
+                                    <h3>Actions:</h3>
+                                    {monster.actions.map((act) => (
+                                        <div key={act.name} className={styles.inlineText}>
+                                            <h4>{act.name}</h4>
+                                            <p>{act.desc}</p>
+                                        </div>  
+                                    ))}
+                                </div>
+                                <div className={styles.traitsListLeft}>
+                                    {monster.legendary_actions.length > 0 ? (
+                                        <>
+                                            <h3>Legendary Actions:</h3>
+                                            <p>{legText}</p>
+                                            {monster.legendary_actions.map((legAct) => (
+                                                <div key={legAct.name} className={styles.inlineText}>
+                                                    <h4>{legAct.name}</h4>
+                                                    <p>{legAct.desc}</p>
+                                                </div>  
+                                            ))}
+                                        </>
+                                    ) : (<></>)}
                                 </div>
                             </div>
                         </div>

@@ -10,10 +10,14 @@ body {
 .mainContainer {
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    align-items: center;
+    flex-direction: column;
     width: 100vw;
     background-color: #1f1f1f;
+}
 
+.statBlockWrapper {
+    margin-bottom: 300px;
 }
 
 .statBlock {
@@ -282,4 +286,62 @@ body {
 
 .printBlock .border {
     display: none;
+}
+.inlineText {
+    margin-top: 10px;
+}
+
+.inlineText h4, .inlineText p{
+    display: inline;
+    font-size: 16px; /* Increased from 12.5px */
+    line-height: 1.2em;
+    margin-right: 5px;
+}
+
+.btns {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 20px;
+    height: fit-content;
+    width: calc(100% - 40px);
+    margin-bottom: 50px;
+}
+
+.backContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.backContainer h1 {
+    color: white;
+    margin: 0;
+}
+
+button {
+    padding: 12px 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.continuebtn button {
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+}
+
+.backbtn {
+    background-color: #1f1f1f;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.backbtn:hover {
+    cursor: pointer;
+    background-color: #333;
 }

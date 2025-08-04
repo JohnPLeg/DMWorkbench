@@ -1,6 +1,5 @@
 import styles from "../StatPreview.module.css"
 import { abilities } from "../../../../Data/abilities";
-import { crProf } from "../../../../Data/dropdownInfo";
 
 function AbilityScores({ monster, setMonster}) {
     // updates the monster object with what the user types
@@ -17,7 +16,15 @@ function AbilityScores({ monster, setMonster}) {
         <>
             {abilities.map(ability => (
                 <div key={ability} className={styles.formGroup}>
-                    <label htmlFor={ability}>{ability.charAt(0).toUpperCase() + ability.slice(1)} (+{Math.floor((monster[ability] - 10) / 2)}):</label>
+                    <label htmlFor={ability}>
+                        {ability.charAt(0).toUpperCase() + ability.slice(1) + ' '}
+                        ({Math.floor((monster[ability] - 10) / 2) >= 0 ? (
+                            `+${Math.floor((monster[ability] - 10) / 2)}`
+                            ) : (
+                                Math.floor((monster[ability] - 10) / 2)
+                            )})  
+                        :
+                    </label>
                     <input 
                         type="text"
                         name={ability}

@@ -18,7 +18,7 @@ function StatPreview() {
     const location = useLocation();
     const [monster, setMonster] = useState({});
     const [loading, setLoading] = useState(true);
-    const [checked, setChecked] = useState(false);
+    const [legText, setLegText] = useState("The monster can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The monster regains spent legendary actions at the start of its turn.");
 
 
     useEffect(() => {
@@ -93,14 +93,31 @@ function StatPreview() {
         }
     }
 
-    const handleCheckbox = () => {
-        checked ? setChecked(false) : setChecked(true);
+    const handleAddAbilityClick = () => {
+        const blankAbility = {
+            name: '',
+            desc: '',
+        }
+
+        setMonster(prevMonster => ({
+            ...prevMonster,
+            special_abilities: [...prevMonster.special_abilities, blankAbility]
+        }))
+    }
+
+    const handleLegTextChange = (e) => {
+        setLegText(e.target.value);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        navigate('/stat-creator/editor', { state: { monster }})
+        navigate('/stat-creator/editor', { 
+            state: { 
+                monster,
+                legText
+            }
+        })
     }
     
     return (
@@ -158,35 +175,30 @@ function StatPreview() {
                         </div>
                         <label>Abilities:</label>
                         <div className={styles.partEight}>
+                            <div className={styles.addBtn}>
+                                <label>Abilities:</label>
+                                <button type="button" onClick={handleAddAbilityClick}>Add Ability</button>
+                            </div>
                             <SpecialAbilities monster={monster} setMonster={setMonster}/>
                         </div>
                         <div className={styles.partNine}>
                             <div className={styles.formGroup}>
-                                <div className={styles.legendBox}>
-                                    <label htmlFor="checkbox">Legendary Creature:</label>
-                                    <input id='checkbox' type="checkbox" onClick={handleCheckbox}/>
+                                <div className={styles.addBtn}>
+                                    <label>Legendary Actions:</label>
+                                    <button type="button" onClick={handleAddLegActionClick}>Add Action</button>
                                 </div>
-                                {checked ? (
+                                {monster.legendary_actions.length > 0 ? (
                                     <>
-                                        <div className={styles.addBtn}>
-                                            <label>Legendary Actions:</label>
-                                            <button type="button" onClick={handleAddLegActionClick}>Add Action</button>
-                                        </div>
                                         <textarea
                                             name="legendaryText"
                                             id="legendaryText"
-                                            placeholder="The monster can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The monster regains spent legendary actions at the start of its turn."
-                                            style={{display: 'block'}}     
+                                            value={legText}
+                                            onChange={handleLegTextChange}
+                                            placeholder="The monster can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The monster regains spent legendary actions at the start of its turn."   
                                         />
                                         <Legendary monster={monster} setMonster={setMonster}/>
                                     </>
-                                ) : (
-                                    <textarea
-                                        name="legendaryText"
-                                        placeholder="The monster can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The monster regains spent legendary actions at the start of its turn."
-                                        style={{display: 'none'}}     
-                                    />
-                                )}
+                                ) : (<></>)}
                             </div>
                         </div>
                     </form>
