@@ -10,6 +10,8 @@ import ProfSection from "./ProfSection/ProfSection";
 import ResistImmun from "./ResistImmunSection/ResistImmun";
 import Senses from "./SensesSection/Senses";
 import Attacks from "./ActionSection/Attacks";
+import Legendary from "./LegendarySection/Legendary";
+import SpecialAbilities from "./SpecialAbilitiesSection/SpecialAbilities";
 
 function StatPreview() {
     const navigate = useNavigate();
@@ -44,6 +46,18 @@ function StatPreview() {
         setMonster(prevMonster => ({
             ...prevMonster,
             actions: [...prevMonster.actions, blankAction]
+        }))
+    }
+
+    const handleAddLegActionClick = () => {
+        const blankLegAction = {
+            name: '',
+            desc: ''
+        }
+
+        setMonster(prevMonster => ({
+            ...prevMonster,
+            legendary_actions: [...prevMonster.legendary_actions, blankLegAction]
         }))
     }
 
@@ -142,24 +156,34 @@ function StatPreview() {
                         <div className={styles.partSeven}>
                             <Attacks monster={monster} setMonster={setMonster}/>
                         </div>
+                        <label>Abilities:</label>
                         <div className={styles.partEight}>
+                            <SpecialAbilities monster={monster} setMonster={setMonster}/>
+                        </div>
+                        <div className={styles.partNine}>
                             <div className={styles.formGroup}>
                                 <div className={styles.legendBox}>
                                     <label htmlFor="checkbox">Legendary Creature:</label>
                                     <input id='checkbox' type="checkbox" onClick={handleCheckbox}/>
                                 </div>
                                 {checked ? (
-                                    <textarea
-                                        name="legendaryText"
-                                        id="legendaryText"
-                                        placeholder="Enter Legendary Text (e.g. abilities, actions, bonus actions, reactions, and legendary actions)"
-                                        style={{display: 'block'}}     
-                                    />
+                                    <>
+                                        <div className={styles.addBtn}>
+                                            <label>Legendary Actions:</label>
+                                            <button type="button" onClick={handleAddLegActionClick}>Add Action</button>
+                                        </div>
+                                        <textarea
+                                            name="legendaryText"
+                                            id="legendaryText"
+                                            placeholder="The monster can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The monster regains spent legendary actions at the start of its turn."
+                                            style={{display: 'block'}}     
+                                        />
+                                        <Legendary monster={monster} setMonster={setMonster}/>
+                                    </>
                                 ) : (
                                     <textarea
                                         name="legendaryText"
-                                        id="legendaryText"
-                                        placeholder="Enter Legendary Text (e.g. abilities, actions, bonus actions, reactions, and legendary actions)"
+                                        placeholder="The monster can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The monster regains spent legendary actions at the start of its turn."
                                         style={{display: 'none'}}     
                                     />
                                 )}

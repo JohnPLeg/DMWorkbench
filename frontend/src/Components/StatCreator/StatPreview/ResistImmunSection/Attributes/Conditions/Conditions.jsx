@@ -5,7 +5,7 @@ function Conditions({ monster, onCondSelection }) {
         <>
             <ul>
                 {condImmuns.map((cond) => (
-                    <li onClick={() => onCondSelection(cond)} key={cond}>{cond || ''}</li>
+                    <li onClick={() => onCondSelection(cond)} key={cond.name}>{cond.name || ''}</li>
                 ))}
             </ul>
         </>
