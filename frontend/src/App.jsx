@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import { UserProvider } from './Context/UserContext'
 import StatPreview from './Components/StatCreator/StatPreview/StatPreview'
 import StatCreator from './Components/StatCreator/StatEditor/StatEditor'
+import Login from './Components/Login/Login'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
             <Route path='stat-creator' element={<StatCreator/>}/>
             <Route path='stat-creator/preview' element={<StatPreview/>}/>
             <Route path='stat-creator/editor' element={<StatCreator/>}/>
+            <Route path='login' element={<Login/>}/>
           </Routes>
         </UserProvider>
       </BrowserRouter>

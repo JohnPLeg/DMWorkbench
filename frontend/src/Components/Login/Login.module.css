@@ -1,0 +1,54 @@
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    background-color: transparent;
+    border: 1px solid white;
+    width: 400px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 25vh;
+}
+
+.box > *, p {
+    color: white;
+}
+
+p {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    font-size: 10px;
+}
+
+p:hover {
+    cursor: pointer;
+}
+
+.box input {
+    width: 50%;
+    margin: 10px;
+}
+
+button {
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: background-color 0.25s;
+}
+
+form {
+    margin: 0;
+}
+
+button:hover {
+    background-color: green;
+}

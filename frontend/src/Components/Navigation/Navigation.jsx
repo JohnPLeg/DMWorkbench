@@ -10,6 +10,7 @@ function Navigation() {
     <nav className={styles.homeNav}>
       <Link to="/"  className={styles.navLink}>Home</Link>
       <Link to="/stat-select" className={styles.navLink}>Stat Blocks</Link>
+      <Link to='/login' className={styles.navLink}>Login</Link>
     </nav>
   );
 }
