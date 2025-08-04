@@ -1,6 +1,6 @@
 import Dropdown from "../Dropdown/Dropdown";
 import styles from "../StatPreview.module.css"
-import { size, type, armorType } from '../../../../Data/dropdownInfo'
+import { size, type, armorType, crProf } from '../../../../Data/dropdownInfo'
 
 function BasicInfo({ monster, setMonster }) {
     // updates the monster object with what the user types
@@ -95,17 +95,6 @@ function BasicInfo({ monster, setMonster }) {
                     value={monster.armor_class?.[0]?.type}
                     onChange={handleDropdownChange}
                     placeholder="Select Armor Type"
-                />
-            </div>
-            <div className={styles.formGroup}>
-                <label htmlFor="name">Challenge Rating:</label>
-                <input 
-                    type="text"
-                    name='name'
-                    id='name'
-                    value={monster?.challenge_rating || ''}
-                    onChange={handleChange}
-                    placeholder="Name"
                 />
             </div>
         </>

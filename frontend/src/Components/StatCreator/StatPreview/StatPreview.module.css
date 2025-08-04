@@ -111,7 +111,7 @@ label {
 }
 
 .partOne {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .partThree {
@@ -119,7 +119,7 @@ label {
 }
 
 .partTwo {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .partFour, .partSix {

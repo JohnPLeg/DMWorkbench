@@ -1,4 +1,5 @@
 import styles from "../StatPreview.module.css"
+import { crProf } from "../../../../Data/dropdownInfo";
 
 function SpeedSection({ monster, setMonster }) {
     // updates the monster object with what the user types
@@ -69,6 +70,17 @@ function SpeedSection({ monster, setMonster }) {
                     value={monster.speed?.swim || ''}
                     onChange={handleChange}
                     placeholder="0 ft."
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label htmlFor="name">Challenge Rating (+{crProf[monster?.challenge_rating]}):</label>
+                <input 
+                    type="text"
+                    name='name'
+                    id='name'
+                    value={monster?.challenge_rating || ''}
+                    onChange={handleChange}
+                    placeholder="Name"
                 />
             </div>
         </>
