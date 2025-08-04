@@ -5,6 +5,7 @@ import { UserProvider } from './Context/UserContext'
 import StatPreview from './Components/StatCreator/StatPreview/StatPreview'
 import StatCreator from './Components/StatCreator/StatEditor/StatEditor'
 import Login from './Components/Login/Login'
+import Register from './Components/Login/Register/Register'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             <Route path='stat-creator/preview' element={<StatPreview/>}/>
             <Route path='stat-creator/editor' element={<StatCreator/>}/>
             <Route path='login' element={<Login/>}/>
+            <Route path='login/register' element={<Register/>}/>
           </Routes>
         </UserProvider>
       </BrowserRouter>
