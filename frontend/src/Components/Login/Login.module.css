@@ -1,6 +1,6 @@
 
 
-.container {
+.loginContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,11 +18,11 @@
     margin-top: 25vh;
 }
 
-.box > *, p {
+.box > *, .regBtn {
     color: white;
 }
 
-p {
+.regBtn {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
@@ -38,7 +38,7 @@ p:hover {
     margin: 10px;
 }
 
-button {
+.submit {
     margin-top: 20px;
     border-radius: 10px;
     background-color: transparent;
@@ -49,6 +49,6 @@ form {
     margin: 0;
 }
 
-button:hover {
+.submit:hover {
     background-color: green;
 }

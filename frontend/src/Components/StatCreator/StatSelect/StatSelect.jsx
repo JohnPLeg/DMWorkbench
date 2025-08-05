@@ -38,7 +38,10 @@ function StatSelect() {
                             if (monster.name[0] === letter) {
                                 return (
                                     <a 
-                                        onClick={() => navigate('/stat-creator/preview', {state: { monsterUrl: monster.url}})} 
+                                        onClick={() => navigate('/stat-creator/preview', {state: { 
+                                            monsterUrl: monster.url,
+                                            route: 'template'
+                                        }})} 
                                         key={monster.name}
                                     >
                                         {monster.name}

@@ -1,12 +1,24 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from './StatEditor.module.css'
 import Navigation from "../../Navigation/Navigation";
+import { doc, setDoc } from 'firebase/firestore'
+import { getAuth } from "firebase/auth";
+import { db } from "../../../firebase";
+
 
 function StatCreator() {
+    const navigate = useNavigate();
+    const auth = getAuth();
     const location = useLocation();
     const { monster, legText } = location.state;
 
-    
+    const handleNav = async () => {
+        await setDoc(doc(db, 'users', auth.currentUser.uid, 'statblocks', monster.name), {
+            monster
+        });
+
+        navigate('/stat-block-home');
+    }
     
     return (
         <div className={styles.statCreator}>
@@ -17,7 +29,7 @@ function StatCreator() {
                         <button className={styles.backbtn} onClick={() => navigate('/stat-select')}>Back</button>
                     </div>
                     <div className={styles.continuebtn}>
-                        <button>Continue</button>
+                        <button onClick={handleNav}>Continue</button>
                     </div>      
                 </div>
                 <div className={styles.statBlockWrapper}>

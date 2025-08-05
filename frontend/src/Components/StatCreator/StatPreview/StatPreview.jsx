@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { doc, getDoc } from 'firebase/firestore'
+import { getAuth } from "firebase/auth";
 import axios from 'axios';
 import styles from './StatPreview.module.css'
 import Navigation from "../../Navigation/Navigation";
@@ -14,6 +16,7 @@ import Legendary from "./LegendarySection/Legendary";
 import SpecialAbilities from "./SpecialAbilitiesSection/SpecialAbilities";
 
 function StatPreview() {
+    const auth = getAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const [monster, setMonster] = useState({});
@@ -22,18 +25,36 @@ function StatPreview() {
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(`https://www.dnd5eapi.co${location.state.monsterUrl}`)
-                setMonster(res.data);
-            } catch (err) {
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+        if (location.state?.route === 'template') {
+            const fetchData = async () => {
+                try {
+                    const res = await axios.get(`https://www.dnd5eapi.co${location.state.monsterUrl}`)
+                    setMonster(res.data);
+                } catch (err) {
+                    console.log(err);
+                } finally {
+                    setLoading(false);
+                }
+            };
 
-        fetchData();
+            fetchData();
+        } else {
+            const fetchStatBlock = async () => {
+                try {
+                    statBlock = await getDoc(doc(db, "users", auth.currentUser.uid, 'statblocks', location.state?.monsterName));
+
+                    if (statBlock.exists()) {
+                        setMonster(statBlock);
+                    } else {
+                        console.log("No Doc Found")
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            fetchStatBlock();
+        }
     }, []);
 
     const handleAddActionClick = () => {

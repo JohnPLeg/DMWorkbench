@@ -18,6 +18,7 @@ function Register() {
         createUserWithEmailAndPassword(auth, form.email, form.password)
             .then((userCredential) => {
                 console.log(userCredential.user);
+                navigate('/stat-block-home');
             })
             .catch((error) => {
                 console.log(error.message);
