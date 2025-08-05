@@ -127,7 +127,10 @@ function StatPreview() {
     }
 
     const handleLegTextChange = (e) => {
-        setLegText(e.target.value);
+        setMonster(prev => ({
+            ...prev,
+            legText: e.target.value
+        }))
     }
 
     const handleSubmit = (e) => {
