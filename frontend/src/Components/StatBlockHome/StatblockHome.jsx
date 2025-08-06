@@ -22,16 +22,17 @@ function StatBlockHome() {
             fetchedBlocks.push(block.data());
         })
 
+        sessionStorage.setItem('monsters', fetchedBlocks);
         setBlocks(fetchedBlocks);
     }
 
     useEffect(() => {
-        getBlocks();
+        if (sessionStorage.getItem('monsters')) {
+            setBlocks(sessionStorage.getItem('monsters'))
+        } else {
+            getBlocks();
+        }
     }, [])
-
-    useEffect(() => {
-        getBlocks();
-    }, [blocks])
 
     const toggleSidebar = () => {
         setSidebar(sidebar ? false : true);
