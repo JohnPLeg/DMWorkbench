@@ -43,12 +43,12 @@ function Register() {
     return (
         <>
             <Navigation/>
-            <div className={styles.container}>
+            <div className={styles.loginContainer}>
                 <form id='registerForm' className={styles.box} onSubmit={handleSubmit}>
                     <h1>Register</h1>
                     <input type="email" placeholder='Email' onChange={handleEmail}/>
                     <input type="password" placeholder='Password' onChange={handlePass}/>
-                    <button type='submit' form='registerForm'>Register</button>
+                    <button type='submit' form='registerForm' className={styles.submit}>Register</button>
                 </form>
             </div>
         </>

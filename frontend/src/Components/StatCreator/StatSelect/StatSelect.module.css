@@ -17,13 +17,13 @@ html, body {
     border-radius: 10px;
     padding: 20px;
     width: 40vw;
+    min-height: 100px;
 }
 
 .monsterCard {
     width: 35vw;
     gap: 50px;
     padding: 0;
-    height: 500px;
 }
 
 .card, .card > * {
@@ -43,7 +43,7 @@ html, body {
     align-items: center;
     height: 100%;
     background-color: #1f1f1f;
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 

@@ -90,6 +90,7 @@ function SpeedSection({ monster, setMonster }) {
                     value={monster?.challenge_rating || ''}
                     onChange={handleCRChange}
                     placeholder="Name"
+                    className={styles.crInput}
                 />
             </div>
         </>

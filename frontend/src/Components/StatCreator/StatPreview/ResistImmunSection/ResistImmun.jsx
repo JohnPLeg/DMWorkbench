@@ -87,7 +87,7 @@ function ResistImmun({ monster, setMonster }) {
         if (!exists) {
             setMonster(prevMonster => ({
                 ...prevMonster,
-                condition_immunities: [...(prevMonster.condition_immunities || []), value]
+                condition_immunities: [...(prevMonster.condition_immunities || []), {name: value}]
             }));
         }
     };

@@ -103,6 +103,7 @@ label {
     display: block; 
     margin-bottom: 5px;
     color: white;
+    text-wrap: nowrap;
 }
 
 .buttonGrid, .partOne, .partTwo, .partThree, .partFour, .partFive, .partSix, .partSeven {
@@ -199,3 +200,6 @@ ul > * {
     width: 10%;
 }
 
+.crInput {
+    min-width: fit-content;
+}

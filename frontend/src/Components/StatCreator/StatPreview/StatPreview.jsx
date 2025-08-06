@@ -41,6 +41,9 @@ function StatPreview() {
         } else if (location.state?.route === 'empty') {
             setLoading(false);
             return
+        } else if (location.state?.route === 'backBtn') {
+            setMonster(location.state.monster);
+            setLoading(false);
         } else {
             const fetchStatBlock = async () => {
                 try {
@@ -218,7 +221,7 @@ function StatPreview() {
                                         <textarea
                                             name="legendaryText"
                                             id="legendaryText"
-                                            value={legText}
+                                            value={monster?.legText || legText}
                                             onChange={handleLegTextChange}
                                             placeholder="The monster can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The monster regains spent legendary actions at the start of its turn."   
                                         />

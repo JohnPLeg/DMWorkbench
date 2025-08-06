@@ -27,7 +27,7 @@ function StatCreator() {
             <div className={styles.mainContainer}>
                 <div className={styles.btns}>
                     <div className={styles.backContainer}>
-                        <button className={styles.backbtn} onClick={() => navigate('/stat-select')}>Back</button>
+                        <button className={styles.backbtn} onClick={() => navigate('/stat-creator/preview', {state: {route: 'backBtn', monster: monster}})}>Back</button>
                     </div>
                     <div className={styles.continuebtn}>
                         <button onClick={handleNav}>Continue</button>

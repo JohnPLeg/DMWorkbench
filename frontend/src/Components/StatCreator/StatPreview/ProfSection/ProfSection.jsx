@@ -120,7 +120,6 @@ function ProfSection({ monster, setMonster }) {
 
     return (
         <>
-            <p onClick={() => console.log(monster)}>Print Monster</p>
             <div className={styles.formGroup}>
                 <Dropdown
                     label="Saving Throw"
