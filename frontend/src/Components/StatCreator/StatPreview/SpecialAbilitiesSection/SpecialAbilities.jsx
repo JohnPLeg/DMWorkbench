@@ -29,7 +29,7 @@ function SpecialAbilities({ monster, setMonster }) {
 
     return (
         <>
-            {monster.special_abilities.map((ability, abilityIdx) => (
+            {monster.special_abilities?.map((ability, abilityIdx) => (
                 <div key={abilityIdx}>
                     <div className={styles.formGroup}>
                         <div className={styles.btnContainer}>

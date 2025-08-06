@@ -7,9 +7,13 @@ function Senses({ monster, setMonster }) {
 
         setMonster(prevMonster => ({
             ...prevMonster,
-            [name]: value
+            senses: {
+                ...prevMonster.senses,
+                [name]: value
+            }
         }));
-    }
+    };
+
     
     return (
         <>
@@ -19,7 +23,7 @@ function Senses({ monster, setMonster }) {
                     type="text"
                     name='blindsight'
                     id='blindsight'
-                    value={monster.senses.blindsight || ''}
+                    value={monster.senses?.blindsight || ''}
                     onChange={handleChange}
                     placeholder="0 ft"
                 />
@@ -30,7 +34,7 @@ function Senses({ monster, setMonster }) {
                     type="text"
                     name='darkvision'
                     id='darkvision'
-                    value={monster.senses.darkvision || ''}
+                    value={monster.senses?.darkvision || ''}
                     onChange={handleChange}
                     placeholder="0 ft"
                 />
@@ -41,7 +45,7 @@ function Senses({ monster, setMonster }) {
                     type="text"
                     name='tremorsense'
                     id='tremorsense'
-                    value={monster.senses.tremorsense || ''}
+                    value={monster.senses?.tremorsense || ''}
                     onChange={handleChange}
                     placeholder="0 ft"
                 />
@@ -52,7 +56,7 @@ function Senses({ monster, setMonster }) {
                     type="text"
                     name='truesight'
                     id='truesight'
-                    value={monster.senses.truesight || ''}
+                    value={monster.senses?.truesight || ''}
                     onChange={handleChange}
                     placeholder="0 ft"
                 />

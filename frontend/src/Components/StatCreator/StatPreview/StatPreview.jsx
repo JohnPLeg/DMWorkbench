@@ -38,6 +38,9 @@ function StatPreview() {
             };
 
             fetchData();
+        } else if (location.state?.route === 'empty') {
+            setLoading(false);
+            return
         } else {
             const fetchStatBlock = async () => {
                 try {
@@ -66,7 +69,7 @@ function StatPreview() {
 
         setMonster(prevMonster => ({
             ...prevMonster,
-            actions: [...prevMonster.actions, blankAction]
+            actions: [...prevMonster.actions || [], blankAction]
         }))
     }
 
@@ -78,7 +81,7 @@ function StatPreview() {
 
         setMonster(prevMonster => ({
             ...prevMonster,
-            legendary_actions: [...prevMonster.legendary_actions, blankLegAction]
+            legendary_actions: [...prevMonster.legendary_actions || [], blankLegAction]
         }))
     }
 
@@ -92,7 +95,7 @@ function StatPreview() {
 
             setMonster(prevMonster => ({
                 ...prevMonster,
-                actions: [blankMulti, ...prevMonster.actions]
+                actions: [blankMulti, ...prevMonster.actions || []]
             }))  
         } else {
             const blankAction = {
@@ -122,7 +125,7 @@ function StatPreview() {
 
         setMonster(prevMonster => ({
             ...prevMonster,
-            special_abilities: [...prevMonster.special_abilities, blankAbility]
+            special_abilities: [...prevMonster.special_abilities || [], blankAbility]
         }))
     }
 
@@ -197,7 +200,6 @@ function StatPreview() {
                         <div className={styles.partSeven}>
                             <Attacks monster={monster} setMonster={setMonster}/>
                         </div>
-                        <label>Abilities:</label>
                         <div className={styles.partEight}>
                             <div className={styles.addBtn}>
                                 <label>Abilities:</label>
@@ -211,7 +213,7 @@ function StatPreview() {
                                     <label>Legendary Actions:</label>
                                     <button type="button" onClick={handleAddLegActionClick}>Add Action</button>
                                 </div>
-                                {monster.legendary_actions.length > 0 ? (
+                                {monster?.legendary_actions?.length > 0 ? (
                                     <>
                                         <textarea
                                             name="legendaryText"

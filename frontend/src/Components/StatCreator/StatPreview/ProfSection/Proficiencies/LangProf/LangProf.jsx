@@ -1,14 +1,15 @@
 import styles from './LangProf.module.css'
 
 function LangProf({ monster, onLangSelection }) {
-    const langs = String(monster.languages).split(',');
+    const langs = String(monster.languages || '').split(',').map(lang => lang.trim()).filter(Boolean);
+
 
     return (
         <>
             <ul>
-                {langs.map((lang) => (
+                {langs.length > 0 ? (langs.map((lang) => (
                     <li onClick={() => onLangSelection(lang)} key={lang}>{lang || ''}</li>
-                ))}
+                ))) : <></>}
             </ul>
         </>
     )

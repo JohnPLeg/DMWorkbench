@@ -1,6 +1,6 @@
 import styles from "../StatPreview.module.css"
 import Dropdown from "../Dropdown/Dropdown";
-import SavingProf from "./Proficiencies/SkillProf/SkillProf";
+import SavingProf from "./Proficiencies/SavingProf/SavingProf";
 import SkillProf from "./Proficiencies/SkillProf/SkillProf"
 import LangProf from "./Proficiencies/LangProf/LangProf";
 import { savingThrows, skills, languages } from "../../../../Data/dropdownInfo";
@@ -8,9 +8,11 @@ import { savingThrows, skills, languages } from "../../../../Data/dropdownInfo";
 function ProfSection({ monster, setMonster }) {
     // updates the state of the monster object when a saving throw prof is added
     const handleSavingProfChange = (name, value) => {
-        const bonus = crProf[monster.challenge_rating] + Math.floor(((monster[value]) - 10) / 2);
+        const crBonus = monster.challenge_rating ? crProf[monster.challenge_rating] : 0;
+        const abilityScore = monster[value] ?? 10;
+        const bonus = crBonus + Math.floor(((abilityScore) - 10) / 2);
 
-        const existingProf = monster.proficiencies.find(prof => 
+        const existingProf = monster.proficiencies?.find(prof => 
             prof.proficiency.index === `saving-throw-${value.toLowerCase()}`
         );
 
@@ -28,7 +30,7 @@ function ProfSection({ monster, setMonster }) {
             setMonster(prevMonster => {
                 const updated = {
                     ...prevMonster,
-                    proficiencies: [...prevMonster.proficiencies, newProficiency]
+                    proficiencies: [...(prevMonster?.proficiencies || []), newProficiency]
                 };
                 return updated;
             });
@@ -37,7 +39,7 @@ function ProfSection({ monster, setMonster }) {
 
     // removes the clicked prof from the monster object
     const handleSavingClick = (value) => {
-        const indexToRemove = monster.proficiencies.findIndex(prof => prof.proficiency.index === `saving-throw-${value.toLowerCase()}`);
+        const indexToRemove = (monster.proficiencies || []).findIndex(prof => prof.proficiency.index === `saving-throw-${value.toLowerCase()}`);
 
         setMonster(prevMonster => ({
             ...prevMonster,
@@ -47,9 +49,11 @@ function ProfSection({ monster, setMonster }) {
 
     // updates the state of the monster object when a saving skill prof is added
     const handleSkillProfChange = (name, value) => {
-        const bonus = crProf[monster.challenge_rating] + Math.floor(((monster[value]) - 10) / 2);
+        const crBonus = monster.challenge_rating ? crProf[monster.challenge_rating] : 0;
+        const abilityScore = monster[value] ?? 10;
+        const bonus = crBonus + Math.floor(((abilityScore) - 10) / 2);
 
-        const existingProf = monster.proficiencies.find(prof => 
+        const existingProf = monster.proficiencies?.find(prof => 
             prof.proficiency.index === `skill-${value.toLowerCase()}`
         );
 
@@ -67,7 +71,7 @@ function ProfSection({ monster, setMonster }) {
             setMonster(prevMonster => {
                 const updated = {
                     ...prevMonster,
-                    proficiencies: [...prevMonster.proficiencies, newProficiency]
+                    proficiencies: [...(prevMonster.proficiencies || []), newProficiency]
                 };
                 return updated;
             });
@@ -76,7 +80,7 @@ function ProfSection({ monster, setMonster }) {
 
     // removes the clicked prof from the monster object
     const handleSkillClick = (value) => {
-        const indexToRemove = monster.proficiencies.findIndex(prof => prof.proficiency.index === `skill-${value.toLowerCase()}`);
+        const indexToRemove = (monster.proficiencies || []).findIndex(prof => prof.proficiency.index === `skill-${value.toLowerCase()}`);
 
         setMonster(prevMonster => ({
             ...prevMonster,
@@ -86,7 +90,7 @@ function ProfSection({ monster, setMonster }) {
 
     // updates the state of the monster object when a language is added
     const handleLangChange = (name, value) => {
-        const langs = monster.languages.split(',').map(lang => lang.trim());
+        const langs = String(monster.languages || '').split(',').map(lang => lang.trim());
 
         const existingLang = langs.find(lang => lang === value);
 
@@ -105,7 +109,7 @@ function ProfSection({ monster, setMonster }) {
     // removes the clicked language from the monster object
     const handleLangClick = (value) => {
         const langs = String(monster.languages).split(',');
-        const indexToRemove = langs.findIndex(lang => lang === value);
+        const indexToRemove = (langs || []).findIndex(lang => lang === value);
         langs.splice(indexToRemove, 1);
 
         setMonster(prevMonster => ({
@@ -116,6 +120,7 @@ function ProfSection({ monster, setMonster }) {
 
     return (
         <>
+            <p onClick={() => console.log(monster)}>Print Monster</p>
             <div className={styles.formGroup}>
                 <Dropdown
                     label="Saving Throw"

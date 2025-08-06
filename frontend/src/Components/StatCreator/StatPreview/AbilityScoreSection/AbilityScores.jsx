@@ -22,7 +22,7 @@ function AbilityScores({ monster, setMonster}) {
                             `+${Math.floor((monster[ability] - 10) / 2)}`
                             ) : (
                                 Math.floor((monster[ability] - 10) / 2)
-                            )})  
+                            ) || ''})  
                         :
                     </label>
                     <input 

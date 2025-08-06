@@ -9,9 +9,18 @@ function SpeedSection({ monster, setMonster }) {
         setMonster(prevMonster => ({
             ...prevMonster,
             speed: {
-                ...prevMonster.speed,
+                ...prevMonster.speed || {},
                 [name]: value
             }
+        }));
+    }
+
+    const handleCRChange = (e) => {
+        const { name, value } = e.target;
+
+        setMonster(prevMonster => ({
+            ...prevMonster,
+            challenge_rating: value
         }));
     }
 
@@ -79,7 +88,7 @@ function SpeedSection({ monster, setMonster }) {
                     name='name'
                     id='name'
                     value={monster?.challenge_rating || ''}
-                    onChange={handleChange}
+                    onChange={handleCRChange}
                     placeholder="Name"
                 />
             </div>

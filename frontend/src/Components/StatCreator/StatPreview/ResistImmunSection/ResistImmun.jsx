@@ -18,10 +18,10 @@ function ResistImmun({ monster, setMonster }) {
     // Click Handlers
     // updates monster object with new vulnerabilities
     const handleVulnClick = () => {
-        if (!monster.damage_vulnerabilities.includes(selectedDamageType)) {
+        if (!(monster.damage_vulnerabilities || []).includes(selectedDamageType)) {
             setMonster(prevMonster => ({
                 ...prevMonster,
-                damage_vulnerabilities: [...prevMonster.damage_vulnerabilities, selectedDamageType]
+                damage_vulnerabilities: [...prevMonster.damage_vulnerabilities || [], selectedDamageType]
             }))
         }
     }
@@ -39,10 +39,10 @@ function ResistImmun({ monster, setMonster }) {
 
     // updates monster object with new resistances
     const handleResistClick = () => {
-        if (!monster.damage_resistances.includes(selectedDamageType)) {
+        if (!(monster.damage_resistances || []).includes(selectedDamageType)) {
             setMonster(prevMonster => ({
                 ...prevMonster,
-                damage_resistances: [...prevMonster.damage_resistances, selectedDamageType]
+                damage_resistances: [...prevMonster.damage_resistances || [], selectedDamageType]
             }))
         }
     }
@@ -60,10 +60,10 @@ function ResistImmun({ monster, setMonster }) {
 
     // updates monster object with new immunities
     const handleImmunClick = () => {
-        if (!monster.damage_immunities.includes(selectedDamageType)) {
+        if (!(monster.damage_immunities || []).includes(selectedDamageType)) {
             setMonster(prevMonster => ({
                 ...prevMonster,
-                damage_immunities: [...prevMonster.damage_immunities, selectedDamageType]
+                damage_immunities: [...prevMonster.damage_immunities || [], selectedDamageType]
             }))
         }
     }
@@ -75,25 +75,26 @@ function ResistImmun({ monster, setMonster }) {
 
         setMonster(prevMonster => ({
             ...prevMonster,
-            damage_resistances: immuns
+            damage_immunities: immuns
         }))
     }
 
     // updates the state of the monster object when a condition is added
     const handleCondImmunChange = (name, value) => {
-        const condImmuns = monster.condition_immunities;
-        const exists = condImmuns.find(condImmun => condImmun === value);
+        const condImmuns = monster.condition_immunities || [];
+        const exists = condImmuns.includes(value);
 
         if (!exists) {
             setMonster(prevMonster => ({
                 ...prevMonster,
-                condition_immunities: [...prevMonster.condition_immunities, value]
-            }))
+                condition_immunities: [...(prevMonster.condition_immunities || []), value]
+            }));
         }
-    }
+    };
+
     // removes the clicked condition immunity from the monster object
     const handleCondImmunListClick = (value) => {
-        const condImmuns = monster.condition_immunities;
+        const condImmuns = monster.condition_immunities || [];
         const indexToRemove = condImmuns.findIndex(cond => cond === value);
         condImmuns.splice(indexToRemove, 1);
 

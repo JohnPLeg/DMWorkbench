@@ -58,7 +58,7 @@ function Attacks({ monster, setMonster }) {
 
     return (
         <>
-            {actionList.map((act, actIndex) => (
+            {actionList?.map((act, actIndex) => (
                 <React.Fragment key={actIndex}>
                     <div className={styles.formGroup}>
                         <div className={styles.btnContainer}>

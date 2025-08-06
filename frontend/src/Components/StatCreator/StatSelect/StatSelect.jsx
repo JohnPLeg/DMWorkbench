@@ -70,7 +70,7 @@ function StatSelect() {
                 </div>
             ) : (
                 <div className={styles.container}>
-                    <div className={styles.card}>
+                    <div className={styles.card} onClick={() => navigate('/stat-creator/preview', {state: {route: 'empty'}})}>
                         <h1>Start From Scratch</h1>
                         <p>Start your custom stat block from scratch inputting all information</p>
                     </div>

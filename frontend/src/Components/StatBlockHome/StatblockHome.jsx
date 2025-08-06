@@ -3,7 +3,7 @@ import Navigation from '../Navigation/Navigation';
 import StatBlock from '../StatCreator/StatEditor/StatBlock/StatBlock';
 import { useEffect, useState } from 'react';
 import { getAuth } from "firebase/auth";
-import { collection, query, getDocs } from 'firebase/firestore';
+import { collection, query, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from "../../firebase";
 
 function StatBlockHome() {
@@ -11,21 +11,27 @@ function StatBlockHome() {
     const [sidebar, setSidebar] = useState(true);
     const [blocks, setBlocks] = useState([]);
     const [render, setRender] = useState('');
+    const [toggleEdit, setToggleEdit] = useState(false);
+
+    const getBlocks = async () => {
+        const q = query(collection(db, 'users', auth.currentUser.uid, 'statblocks'));
+        const qSnapshot = await getDocs(q);
+
+        const fetchedBlocks = [];
+        qSnapshot.forEach((block) => {
+            fetchedBlocks.push(block.data());
+        })
+
+        setBlocks(fetchedBlocks);
+    }
 
     useEffect(() => {
-        const getBlocks = async () => {
-            const q = query(collection(db, 'users', auth.currentUser.uid, 'statblocks'));
-            const qSnapshot = await getDocs(q);
-
-            const fetchedBlocks = [];
-            qSnapshot.forEach((block) => {
-                fetchedBlocks.push(block.data());
-            })
-
-            setBlocks(fetchedBlocks);
-        }
         getBlocks();
     }, [])
+
+    useEffect(() => {
+        getBlocks();
+    }, [blocks])
 
     const toggleSidebar = () => {
         setSidebar(sidebar ? false : true);
@@ -40,19 +46,43 @@ function StatBlockHome() {
         }
     }
 
+    const handleEdit = () => {
+        setToggleEdit(toggleEdit ? false : true);
+    }
+
+    const handleRemove = async (name) => {
+        try {
+            await deleteDoc(doc(db, 'users', auth.currentUser.uid, 'statblocks', name));
+            setBlocks(blocks.filter(item => item.monster.name !== name));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <div className={styles.dashboard}>
                 <div className={styles.sidebar} style={{width: sidebar ? '300px' : '60px'}}>
                     <button className={styles.toggleButton} onClick={toggleSidebar}>≡</button>
                     {blocks.map((statBlock) => (
-                        <button 
-                            key={statBlock.monster.name}
-                            style={{display: sidebar ? '' : 'none'}}
-                            className={styles.sidebarStat}
-                            onClick={() => renderBlock(statBlock.monster.name)}
-                        >{statBlock.monster.name}</button>
+                        <div className={styles.blockBtn} key={statBlock.monster.name}>
+                            <button 
+                                style={{display: sidebar ? '' : 'none'}}
+                                className={styles.sidebarStat}
+                                onClick={() => renderBlock(statBlock.monster.name)}
+                            >{statBlock.monster.name}</button>
+                            <button 
+                                className={styles.removeBtn} 
+                                style={{display: sidebar && toggleEdit ? '' : 'none'}}
+                                onClick={() => handleRemove(statBlock.monster.name)}
+                            >X</button>
+                        </div>
                     ))}
+                    <button
+                        className={styles.editBtn}
+                        style={{display: sidebar ? '' : 'none'}}
+                        onClick={handleEdit}
+                    >✎</button>
                 </div>
                 <div className={styles.mainPage} style={{width: sidebar ? 'calc(100vw - 300px)' : 'calc(100vw - 60px)', marginLeft: sidebar ? '300px' : '60px'}}>
                     <Navigation/>

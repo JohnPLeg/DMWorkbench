@@ -1,6 +1,11 @@
 import styles from './StatBlock.module.css'
 
 function StatBlock({ monster, legText }) {
+    const calcPassivePerception = () => {
+        const crBonus = monster.challenge_rating ? crProf[monster.challenge_rating] : 0;
+        return 10 + Math.floor(((monster?.wisdom || 10) - 10) / 2) + crBonus;
+    }
+
     return (
         <div className={styles.statBlockWrapper}>
             <div className={styles.statBlock}>
@@ -8,7 +13,7 @@ function StatBlock({ monster, legText }) {
                 <div className={styles.sectionLeft}>
                     <div className={styles.creatureHeading}>
                         <h1 className={styles.monsterName} >{monster.name}</h1>
-                        <h2>{monster.size} {monster.type}, {monster.alignment}</h2>
+                        <h2>{monster?.size || ''} {monster?.type || ''}, {monster?.alignment || ''}</h2>
                     </div>
                     <svg height='5' width="100%" className={styles.rule}>
                         <polyline points="0,0 400,2.5 0,5"></polyline>
@@ -16,15 +21,15 @@ function StatBlock({ monster, legText }) {
                     <div className={styles.topStats}>
                         <div className={`${styles.propertyLine} ${styles.first}`}>
                             <h4>Armor Class</h4>
-                            <p className={styles.armorClass}>{monster.armor_class[0].value}</p>
+                            <p className={styles.armorClass}>{monster?.armor_class?.[0]?.value || 'none'}</p>
                         </div>
                         <div className={styles.propertyLine}>
                             <h4>Hit Points</h4>
-                            <p className={styles.hitPoints}>{monster.hit_points}   ({monster.hit_dice})</p>
+                            <p className={styles.hitPoints}>{monster?.hit_points || ''}   ({monster?.hit_dice || ''})</p>
                         </div>
                         <div className={`${styles.propertyLine} ${styles.last}`}>
                             <h4>Speed</h4>
-                            <p className={styles.speed}>{monster.speed.walk}</p>
+                            <p className={styles.speed}>{monster?.speed?.walk || ''}</p>
                         </div>
                         <svg height='5' width="100%" className={styles.rule}>
                             <polyline points="0,0 400,2.5 0,5"></polyline>
@@ -32,55 +37,55 @@ function StatBlock({ monster, legText }) {
                         <div className={styles.scores}>
                             <div className={styles.strength}>
                                 <h4>STR</h4>
-                                <p>{monster.strength} ({Math.floor((monster.strength - 10) / 2) >= 0 ? (
-                                    `+${Math.floor((monster.strength - 10) / 2)}`
+                                <p>{monster?.strength || ''} ({Math.floor(((monster?.strength || 10) - 10) / 2) >= 0 ? (
+                                    `+${Math.floor(((monster?.strength || 10) - 10) / 2)}`
                                     ) : (
-                                        Math.floor((monster.strength - 10) / 2)
+                                        Math.floor((monster?.strength || 10) / 2)
                                     )})
                                 </p>
                             </div>
                             <div className={styles.dexterity}>
                                 <h4>DEX</h4>
-                                <p>{monster.dexterity} ({Math.floor((monster.dexterity - 10) / 2) >= 0 ? (
-                                    `+${Math.floor((monster.dexterity - 10) / 2)}`
+                                <p>{monster?.dexterity || ''} ({Math.floor(((monster?.dexterity || 10) - 10) / 2) >= 0 ? (
+                                    `+${Math.floor(((monster?.dexterity || 10) - 10) / 2)}`
                                     ) : (
-                                        Math.floor((monster.dexterity - 10) / 2)
+                                        Math.floor(((monster?.dexterity || 10) - 10) / 2)
                                     )})
                                 </p>
                             </div>
                             <div className={styles.constitution}>
                                 <h4>CON</h4>
-                                <p>{monster.constitution} ({Math.floor((monster.constitution - 10) / 2) >= 0 ? (
-                                    `+${Math.floor((monster.constitution - 10) / 2)}`
+                                <p>{monster?.constitution || ''} ({Math.floor(((monster?.constitution || 10) - 10) / 2) >= 0 ? (
+                                    `+${Math.floor(((monster?.constitution || 10) - 10) / 2)}`
                                     ) : (
-                                        Math.floor((monster.constitution - 10) / 2)
+                                        Math.floor(((monster?.constitution || 10) - 10) / 2)
                                     )})
                                 </p>
                             </div>
                             <div className={styles.intelligence}>
                                 <h4>INT</h4>
-                                <p>{monster.intelligence} ({Math.floor((monster.intelligence - 10) / 2) >= 0 ? (
-                                    `+${Math.floor((monster.intelligence - 10) / 2)}`
+                                <p>{monster?.intelligence || ''} ({Math.floor(((monster?.intelligence || 10) - 10) / 2) >= 0 ? (
+                                    `+${Math.floor(((monster?.intelligence || 10) - 10) / 2)}`
                                     ) : (
-                                        Math.floor((monster.intelligence - 10) / 2)
+                                        Math.floor(((monster?.intelligence || 10) - 10) / 2)
                                     )})
                                 </p>
                             </div>
                             <div className={styles.wisdom}>
                                 <h4>WIS</h4>
-                                <p>{monster.wisdom} ({Math.floor((monster.wisdom - 10) / 2) >= 0 ? (
-                                    `+${Math.floor((monster.wisdom - 10) / 2)}`
+                                <p>{monster?.wisdom || ''} ({Math.floor(((monster?.wisdom || 10) - 10) / 2) >= 0 ? (
+                                    `+${Math.floor(((monster?.wisdom || 10) - 10) / 2)}`
                                     ) : (
-                                        Math.floor((monster.wisdom - 10) / 2)
+                                        Math.floor(((monster?.wisdom || 10) - 10) / 2)
                                     )})
                                 </p>
                             </div>
                             <div className={styles.charisma}>
                                 <h4>CHA</h4>
-                                <p>{monster.charisma} ({Math.floor((monster.charisma - 10) / 2) >= 0 ? (
-                                    `+${Math.floor((monster.charisma - 10) / 2)}`
+                                <p>{monster?.charisma || ''} ({Math.floor(((monster?.charisma || 10) - 10) / 2) >= 0 ? (
+                                    `+${Math.floor(((monster?.charisma || 10) - 10) / 2)}`
                                     ) : (
-                                        Math.floor((monster.charisma - 10) / 2)
+                                        Math.floor(((monster?.charisma || 10) - 10) / 2)
                                     )})
                                 </p>
                             </div>
@@ -92,7 +97,7 @@ function StatBlock({ monster, legText }) {
                             <div className={`${styles.propertyLine} ${styles.first}`}>
                                 <div>
                                     <h4>Senses</h4>
-                                    <p>Passive Perception {monster.senses.passive_perception}</p>
+                                    <p>Passive Perception {monster?.senses?.passive_perception || calcPassivePerception()}</p>
                                 </div>
                             </div>
                             <div className={styles.propertyLine}>
@@ -112,7 +117,7 @@ function StatBlock({ monster, legText }) {
                     </svg>
                     <div className={styles.actions}>
                         <div className={styles.traitsListLeft}>
-                            {monster.special_abilities.map((ability) => (
+                            {monster?.special_abilities?.map((ability) => (
                                 <div key={ability.name} className={styles.inlineText}>
                                     <div>
                                         <h4>{ability.name}.</h4>
@@ -123,7 +128,7 @@ function StatBlock({ monster, legText }) {
                         </div>
                         <div className={styles.traitsListLeft}>
                             <h3>Actions:</h3>
-                            {monster.actions.map((act) => (
+                            {monster?.actions?.map((act) => (
                                 <div key={act.name} className={styles.inlineText}>
                                     <h4>{act.name}</h4>
                                     <p>{act.desc}</p>
@@ -131,7 +136,7 @@ function StatBlock({ monster, legText }) {
                             ))}
                         </div>
                         <div className={styles.traitsListLeft}>
-                            {monster.legendary_actions.length > 0 ? (
+                            {monster?.legendary_actions?.length > 0 ? (
                                 <>
                                     <h3>Legendary Actions:</h3>
                                     <p>{legText}</p>

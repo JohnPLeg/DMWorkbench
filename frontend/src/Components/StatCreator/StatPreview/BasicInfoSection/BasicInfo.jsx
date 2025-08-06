@@ -14,11 +14,27 @@ function BasicInfo({ monster, setMonster }) {
     }
 
     const handleDropdownChange = (name, value) => {
-        setMonster(prevMonster => ({
-            ...prevMonster,
+        setMonster((prev) => {
+        if (name === 'armorType') {
+            return {
+                ...prev,
+                armor_class: [
+                {
+                    ...(prev.armor_class?.[0] || {}),
+                    type: value
+                }
+                ]
+            };
+        }
+
+        // Default case for all other fields
+        return {
+            ...prev,
             [name]: value
-        }));
+            };
+        });
     };
+
 
 
     return (
@@ -92,7 +108,7 @@ function BasicInfo({ monster, setMonster }) {
                     label="Armor Type"
                     name="armorType"
                     options={armorType}
-                    value={monster.armor_class?.[0]?.type}
+                    value={monster.armor_class?.[0]?.type || ''}
                     onChange={handleDropdownChange}
                     placeholder="Select Armor Type"
                 />

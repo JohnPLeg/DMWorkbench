@@ -3,7 +3,7 @@ import styles from './SkillProf.module.css'
 function SavingProf({ monster, onSkillSelection }) {
     let profSkills = [];
 
-    monster.proficiencies.forEach((prof) => {
+    monster.proficiencies?.forEach((prof) => {
         if ((prof.proficiency.index).includes('skill')) {
             profSkills.push(prof.proficiency.name.replace('Skill: ', ''))
         }
