@@ -140,7 +140,7 @@ function StatBlock({ monster, legText }) {
                                 <>
                                     <h3>Legendary Actions:</h3>
                                     <p>{legText}</p>
-                                    {monster.legendary_actions.map((legAct) => (
+                                    {monster?.legendary_actions?.map((legAct) => (
                                         <div key={legAct.name} className={styles.inlineText}>
                                             <h4>{legAct.name}</h4>
                                             <p>{legAct.desc}</p>
@@ -148,15 +148,6 @@ function StatBlock({ monster, legText }) {
                                     ))}
                                 </>
                             ) : (<></>)}
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.sectionRight}>
-                    <div className={styles.actions}>
-                        <div className={styles.traitsListRight}>
-                            <div className={styles.propertyBlock}>
-
-                            </div>
                         </div>
                     </div>
                 </div>

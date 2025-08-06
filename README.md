@@ -1,1 +1,1 @@
-A real time chat application
+A dnd stat block creator by John Legge
