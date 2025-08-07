@@ -51,12 +51,16 @@
   background-color: transparent;
   color: white;
   font-size: 20px;
+  position: fixed;
+  bottom: 0px;
+  margin-bottom: 20px;
 }
 
 .blockBtn {
   display: flex;
   flex-direction: row;
   width: 75%;
+  margin-top: 2vh;
 }
 
 .removeBtn {
@@ -81,4 +85,13 @@
 
 .changeBlockBtn:hover {
   background-color: rgba(40, 40, 40, 1);
+}
+
+.monsterList {
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  scrollbar-color: #1f1f1f transparent;
 }

@@ -15,6 +15,16 @@ function StatBlockHome() {
     const [render, setRender] = useState('');
     const [toggleEdit, setToggleEdit] = useState(false);
 
+    function comapare(a, b) {
+        if (a.name < b.name) {
+            return -1;
+        }
+        if (a.name > b.name) {
+            return 1
+        }
+        return 0;
+    }
+
     const getBlocks = async () => {
         const q = query(collection(db, 'users', auth.currentUser.uid, 'statblocks'));
         const qSnapshot = await getDocs(q);
@@ -23,6 +33,8 @@ function StatBlockHome() {
         qSnapshot.forEach((block) => {
             fetchedBlocks.push(block.data());
         })
+
+        fetchedBlocks.sort( comapare );
 
         sessionStorage.setItem('monsters', JSON.stringify(fetchedBlocks));
         setBlocks(fetchedBlocks);
@@ -41,6 +53,10 @@ function StatBlockHome() {
             getBlocks();
         }
     }, [])
+
+    useEffect(() => {
+        sessionStorage.setItem('monsters', blocks);
+    }, [blocks])
 
     const toggleSidebar = () => {
         setSidebar(sidebar ? false : true);
@@ -79,25 +95,27 @@ function StatBlockHome() {
             <div className={styles.dashboard}>
                 <div className={styles.sidebar} style={{width: sidebar ? '300px' : '60px'}}>
                     <button className={styles.toggleButton} onClick={toggleSidebar}>≡</button>
-                    {blocks.length > 0 ? (blocks.map((statBlock) => (
-                        <div className={styles.blockBtn} key={statBlock.monster.name}>
-                            <button 
-                                className={styles.changeBlockBtn} 
-                                style={{display: sidebar && toggleEdit ? '' : 'none'}}
-                                onClick={() => handleNavEditor(statBlock)}
-                            >✎</button>
-                            <button 
-                                style={{display: sidebar ? '' : 'none', borderRadius: sidebar && toggleEdit ? '': '10px'}}
-                                className={styles.sidebarStat}
-                                onClick={() => renderBlock(statBlock.monster.name)}
-                            >{statBlock.monster.name}</button>
-                            <button 
-                                className={styles.removeBtn} 
-                                style={{display: sidebar && toggleEdit ? '' : 'none'}}
-                                onClick={() => handleRemove(statBlock.monster.name)}
-                            >X</button>
-                        </div>
-                    ))) : (<></>)}
+                    <div className={styles.monsterList}>
+                        {blocks.length > 0 ? (blocks.map((statBlock) => (
+                            <div className={styles.blockBtn} key={statBlock.monster.name}>
+                                <button 
+                                    className={styles.changeBlockBtn} 
+                                    style={{display: sidebar && toggleEdit ? '' : 'none'}}
+                                    onClick={() => handleNavEditor(statBlock)}
+                                >✎</button>
+                                <button 
+                                    style={{display: sidebar ? '' : 'none', borderRadius: sidebar && toggleEdit ? '': '10px'}}
+                                    className={styles.sidebarStat}
+                                    onClick={() => renderBlock(statBlock.monster.name)}
+                                >{statBlock.monster.name}</button>
+                                <button 
+                                    className={styles.removeBtn} 
+                                    style={{display: sidebar && toggleEdit ? '' : 'none'}}
+                                    onClick={() => handleRemove(statBlock.monster.name)}
+                                >X</button>
+                            </div>
+                        ))) : (<></>)}
+                    </div>
                     <button
                         className={styles.editBtn}
                         style={{display: sidebar ? '' : 'none'}}
