@@ -49,6 +49,7 @@ function StatPreview() {
             if (editMonster) {
                 const parsed = JSON.parse(editMonster);
                 setMonster(parsed.monster);
+                sessionStorage.removeItem('editMonster');
             }
             setLoading(false);
         } else {

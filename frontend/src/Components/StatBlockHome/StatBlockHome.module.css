@@ -45,7 +45,26 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow: auto;
+  scrollbar-color: #1f1f1f transparent; 
+  scrollbar-width: thin;  
 }
+
+.mainPage::-webkit-scrollbar {
+  width: 10px;
+}
+
+.mainPage::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mainPage::-webkit-scrollbar-thumb {
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
 
 .editBtn {
   background-color: transparent;

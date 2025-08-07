@@ -55,7 +55,9 @@ function StatBlockHome() {
     }, [])
 
     useEffect(() => {
-        sessionStorage.setItem('monsters', blocks);
+        if (blocks.length > 0) {
+            sessionStorage.setItem('monsters', JSON.stringify(blocks));
+        }
     }, [blocks])
 
     const toggleSidebar = () => {
