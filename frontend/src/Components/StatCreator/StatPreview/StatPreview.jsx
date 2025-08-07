@@ -44,6 +44,13 @@ function StatPreview() {
         } else if (location.state?.route === 'backBtn') {
             setMonster(location.state.monster);
             setLoading(false);
+        } else if (location.state?.route === 'fromDash') {
+            const editMonster = sessionStorage.getItem('editMonster');
+            if (editMonster) {
+                const parsed = JSON.parse(editMonster);
+                setMonster(parsed.monster);
+            }
+            setLoading(false);
         } else {
             const fetchStatBlock = async () => {
                 try {

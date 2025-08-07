@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from './StatEditor.module.css'
 import Navigation from "../../Navigation/Navigation";
 import StatBlock from "./StatBlock/StatBlock";
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, deleteDoc } from 'firebase/firestore'
 import { getAuth } from "firebase/auth";
 import { db } from "../../../firebase";
 
@@ -14,10 +14,18 @@ function StatCreator() {
     const { monster } = location.state;
 
     const handleNav = async () => {
+        const prevName = sessionStorage.getItem('originalName');
+
+        if (prevName) {
+            await deleteDoc(doc(db, 'users', auth.currentUser.uid, 'statblocks', JSON.parse(prevName)));
+            sessionStorage.removeItem('originalName');
+        }
+
         await setDoc(doc(db, 'users', auth.currentUser.uid, 'statblocks', monster.name), {
             monster
         });
 
+        sessionStorage.setItem('refresh', true);
         navigate('/stat-block-home');
     }
     
