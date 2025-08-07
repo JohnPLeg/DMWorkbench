@@ -4,6 +4,8 @@ body {
 
 .statBlockWrapper {
     margin-bottom: 300px;
+    margin-left: 75px;
+    margin-right: 75px;
 }
 
 .statBlock {

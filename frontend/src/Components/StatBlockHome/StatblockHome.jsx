@@ -13,6 +13,7 @@ function StatBlockHome() {
     const [sidebar, setSidebar] = useState(true);
     const [blocks, setBlocks] = useState([]);
     const [render, setRender] = useState('');
+    const [renderComp, setRenderComp] = useState([]);
     const [toggleEdit, setToggleEdit] = useState(false);
 
     function comapare(a, b) {
@@ -66,11 +67,16 @@ function StatBlockHome() {
     }
 
     const renderBlock = (component) => {
-        if (render === component) {
-            setRender('');
+        if (renderComp.includes(component)) {
+            setRenderComp(prev => prev.filter(el => el !== component));
         } else {
-            setRender(component);
+            setRenderComp(prev => [...prev, component]);
         }
+        // if (render === component) {
+        //     setRender('');
+        // } else {
+        //     setRender(component);
+        // }
     }
 
     const handleEditMode = () => {
@@ -126,9 +132,11 @@ function StatBlockHome() {
                 </div>
                 <div className={styles.mainPage} style={{width: sidebar ? 'calc(100vw - 300px)' : 'calc(100vw - 60px)', marginLeft: sidebar ? '300px' : '60px'}}>
                     <Navigation/>
-                    {blocks.map((statBlock) => (
-                        render === statBlock.monster.name && <StatBlock key={statBlock.monster.name} monster={statBlock.monster} legText={statBlock.monster?.legText || ''}/>
-                    ))}
+                    <div className={styles.statBlockContainer}>
+                        {blocks.map((statBlock) => (
+                            renderComp.includes(statBlock.monster.name) && <StatBlock key={statBlock.monster.name} monster={statBlock.monster} legText={statBlock.monster?.legText || ''}/>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>
