@@ -9,6 +9,7 @@ import { auth } from '../../firebase';
 
 function Login() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         email: '',
         password: ''
@@ -16,12 +17,14 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         try {
             await loginWithEmail(form.email, form.password);
             navigate('/stat-block-home');
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -51,7 +54,7 @@ function Login() {
                     <h1>Login</h1>
                     <input type="email" placeholder='Email' onChange={handleEmail}/>
                     <input type="password" placeholder='Password' onChange={handlePass}/>
-                    <button type='submit' form='loginForm' className={styles.submit}>Sign In</button>
+                    <button type='submit' form='loginForm' className={styles.submit} disabled={loading} style={loading ? { opacity: 0.5, pointerEvents: 'none' } : {}}>Sign In</button>
                 </form>
             </div>
             <p className={styles.regBtn} onClick={handleClick}>Register</p>
