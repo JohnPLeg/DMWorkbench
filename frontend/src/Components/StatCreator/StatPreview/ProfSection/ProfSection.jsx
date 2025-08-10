@@ -3,6 +3,7 @@ import Dropdown from "../Dropdown/Dropdown";
 import SavingProf from "./Proficiencies/SavingProf/SavingProf";
 import SkillProf from "./Proficiencies/SkillProf/SkillProf"
 import LangProf from "./Proficiencies/LangProf/LangProf";
+import { crProf } from "../../../../Data/dropdownInfo";
 import { savingThrows, skills, languages } from "../../../../Data/dropdownInfo";
 
 function ProfSection({ monster, setMonster }) {
