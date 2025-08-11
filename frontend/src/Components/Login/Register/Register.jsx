@@ -59,7 +59,7 @@ function Register() {
                         form='registerForm' 
                         className={styles.submit}
                         disabled={loadingPage} 
-                        style={loadingpage ? { opacity: 0.5, pointerEvents: 'none' } : {}}
+                        style={loadingPage ? { opacity: 0.5, pointerEvents: 'none' } : {}}
                     >Register</button>
                 </form>
             </div>
