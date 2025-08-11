@@ -22,7 +22,7 @@ function Login() {
             await loginWithEmail(form.email, form.password);
             navigate('/stat-block-home');
         } catch (error) {
-            console.log(error);
+            alert("No user found with those credentials");
         } finally {
             setLoading(false);
         }

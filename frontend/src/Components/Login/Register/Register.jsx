@@ -23,6 +23,7 @@ function Register() {
                 navigate('/stat-block-home');
             })
             .catch((error) => {
+                alert("Error during registration, password must be 6 characters minimum");
                 console.log(error.message);
             })
         } finally {
