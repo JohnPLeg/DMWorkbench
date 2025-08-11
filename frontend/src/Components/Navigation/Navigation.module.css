@@ -50,4 +50,5 @@ html, body {
 
 .navLink:hover {
     text-decoration: underline;
+    cursor: pointer;
 }

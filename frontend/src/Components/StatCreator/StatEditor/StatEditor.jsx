@@ -11,10 +11,15 @@ function StatCreator() {
     const navigate = useNavigate();
     const auth = getAuth();
     const location = useLocation();
-    const { monster } = location.state;
+    const { monster, legText } = location.state;
 
     const handleNav = async () => {
         const prevName = sessionStorage.getItem('originalName');
+
+        const newMonster = {
+            ...monster,
+            legText
+        }
 
         if (prevName) {
             await deleteDoc(doc(db, 'users', auth.currentUser.uid, 'statblocks', JSON.parse(prevName)));
@@ -22,7 +27,7 @@ function StatCreator() {
         }
 
         await setDoc(doc(db, 'users', auth.currentUser.uid, 'statblocks', monster.name), {
-            monster
+            monster: newMonster
         });
 
         sessionStorage.setItem('refresh', true);
@@ -41,7 +46,7 @@ function StatCreator() {
                         <button onClick={handleNav}>Continue</button>
                     </div>      
                 </div>
-                <StatBlock monster={monster} legText={monster?.legText}/>
+                <StatBlock monster={monster} legText={legText}/>
             </div>
         </div>
     )

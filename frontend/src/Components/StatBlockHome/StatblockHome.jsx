@@ -102,7 +102,7 @@ function StatBlockHome() {
                     <button className={styles.toggleButton} onClick={toggleSidebar}>≡</button>
                     <div className={styles.monsterList}>
                         {blocks.length > 0 ? (blocks.map((statBlock) => (
-                            <div className={styles.blockBtn} key={statBlock.monster.name}>
+                            <div className={styles.blockBtn} key={statBlock.monster?.name}>
                                 <button 
                                     className={styles.changeBlockBtn} 
                                     style={{display: sidebar && toggleEdit ? '' : 'none'}}
@@ -112,7 +112,7 @@ function StatBlockHome() {
                                     style={{display: sidebar ? '' : 'none', borderRadius: sidebar && toggleEdit ? '': '10px'}}
                                     className={styles.sidebarStat}
                                     onClick={() => renderBlock(statBlock.monster.name)}
-                                >{statBlock.monster.name}</button>
+                                >{statBlock.monster?.name}</button>
                                 <button 
                                     className={styles.removeBtn} 
                                     style={{display: sidebar && toggleEdit ? '' : 'none'}}
@@ -131,7 +131,7 @@ function StatBlockHome() {
                     <Navigation/>
                     <div className={styles.statBlockContainer}>
                         {blocks.map((statBlock) => (
-                            renderComp.includes(statBlock.monster.name) && <StatBlock key={statBlock.monster.name} monster={statBlock.monster} legText={statBlock.monster?.legText || ''}/>
+                            renderComp.includes(statBlock.monster?.name) && <StatBlock key={statBlock.monster.name} monster={statBlock.monster} legText={statBlock.monster?.legText || ''}/>
                         ))}
                     </div>
                     <div className={styles.warnContainer} style={{display: warn ? '' : 'none', left: sidebar ? '60%': '50%'}} >

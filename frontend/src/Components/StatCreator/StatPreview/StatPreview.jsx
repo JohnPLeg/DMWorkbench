@@ -160,7 +160,7 @@ function StatPreview() {
                 }
             })
         } finally {
-            loadingPage(false);
+            setLoadingPage(false);
         }
     }
     
