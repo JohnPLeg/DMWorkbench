@@ -7,6 +7,7 @@ import Navigation from '../../Navigation/Navigation';
 
 function Register() {
     const navigate = useNavigate();
+    const [loadingPage, setLoadingPage] = useState(false);
     const [form, setForm] = useState({
         email: '',
         password: ''
@@ -14,15 +15,19 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoadingPage(true);
 
-        createUserWithEmailAndPassword(auth, form.email, form.password)
+        try {
+            createUserWithEmailAndPassword(auth, form.email, form.password)
             .then((userCredential) => {
-                console.log(userCredential.user);
                 navigate('/stat-block-home');
             })
             .catch((error) => {
                 console.log(error.message);
             })
+        } finally {
+            setLoadingPage(false);
+        }
     }
 
     const handleEmail = (e) => {
@@ -48,7 +53,13 @@ function Register() {
                     <h1>Register</h1>
                     <input type="email" placeholder='Email' onChange={handleEmail}/>
                     <input type="password" placeholder='Password' onChange={handlePass}/>
-                    <button type='submit' form='registerForm' className={styles.submit}>Register</button>
+                    <button
+                        type='submit' 
+                        form='registerForm' 
+                        className={styles.submit}
+                        disabled={loadingPage} 
+                        style={loadingpage ? { opacity: 0.5, pointerEvents: 'none' } : {}}
+                    >Register</button>
                 </form>
             </div>
         </>

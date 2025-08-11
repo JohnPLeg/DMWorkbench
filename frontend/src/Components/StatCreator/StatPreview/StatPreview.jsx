@@ -150,7 +150,7 @@ function StatPreview() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        loadingPage(true);
+        setLoadingPage(true);
 
         try {
             navigate('/stat-creator/editor', { 
