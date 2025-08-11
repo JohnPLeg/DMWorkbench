@@ -1,5 +1,3 @@
-
-
 .loginContainer {
     display: flex;
     justify-content: center;
@@ -23,15 +21,20 @@
     color: white;
 }
 
-.regBtn {
+.forgotBtn, .regBtn{
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
     font-size: 10px;
 }
 
-p:hover {
+.regBtn:hover, .forgotBtn:hover {
     cursor: pointer;
+}
+
+.forgotBtn {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .box input {

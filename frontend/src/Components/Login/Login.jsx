@@ -3,11 +3,12 @@ import styles from './Login.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginWithEmail } from '../../firebase/auth';
-import { auth } from '../../firebase';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 
 
 
 function Login() {
+    const auth = getAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
@@ -42,6 +43,17 @@ function Login() {
         }))
     }
 
+    const handlePassReset = () => {
+        sendPasswordResetEmail(auth, email)
+        .then(() => {
+            console.log("Password reset email sent!");
+            alert("An email with to reset your password has been sent");
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
     const handleClick = () => {
         navigate('/login/register');
     }
@@ -54,6 +66,7 @@ function Login() {
                     <h1>Login</h1>
                     <input type="email" placeholder='Email' onChange={handleEmail}/>
                     <input type="password" placeholder='Password' onChange={handlePass}/>
+                    <p className={styles.forgotBtn} onClick={handlePassReset}>Forgot password?</p>
                     <button type='submit' form='loginForm' className={styles.submit} disabled={loading} style={loading ? { opacity: 0.5, pointerEvents: 'none' } : {}}>Sign In</button>
                 </form>
             </div>
