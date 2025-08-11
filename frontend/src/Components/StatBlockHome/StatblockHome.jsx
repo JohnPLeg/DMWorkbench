@@ -12,7 +12,8 @@ function StatBlockHome() {
     const auth = getAuth();
     const [sidebar, setSidebar] = useState(true);
     const [blocks, setBlocks] = useState([]);
-    const [render, setRender] = useState('');
+    const [warn, setWarn] = useState(false);
+    const [blockToRemove, setBlockToRemove] = useState('');
     const [renderComp, setRenderComp] = useState([]);
     const [toggleEdit, setToggleEdit] = useState(false);
 
@@ -63,7 +64,6 @@ function StatBlockHome() {
 
     const toggleSidebar = () => {
         setSidebar(sidebar ? false : true);
-        console.log(blocks);
     }
 
     const renderBlock = (component) => {
@@ -72,11 +72,6 @@ function StatBlockHome() {
         } else {
             setRenderComp(prev => [...prev, component]);
         }
-        // if (render === component) {
-        //     setRender('');
-        // } else {
-        //     setRender(component);
-        // }
     }
 
     const handleEditMode = () => {
@@ -97,6 +92,8 @@ function StatBlockHome() {
         sessionStorage.setItem('originalName', JSON.stringify(statBlock.monster.name));
         navigate('/stat-creator/preview', {state: { route: 'fromDash'}})
     }
+
+
 
     return (
         <>
@@ -119,7 +116,7 @@ function StatBlockHome() {
                                 <button 
                                     className={styles.removeBtn} 
                                     style={{display: sidebar && toggleEdit ? '' : 'none'}}
-                                    onClick={() => handleRemove(statBlock.monster.name)}
+                                    onClick={() => {setWarn(true); setBlockToRemove(statBlock.monster.name)}}
                                 >X</button>
                             </div>
                         ))) : (<></>)}
@@ -136,6 +133,13 @@ function StatBlockHome() {
                         {blocks.map((statBlock) => (
                             renderComp.includes(statBlock.monster.name) && <StatBlock key={statBlock.monster.name} monster={statBlock.monster} legText={statBlock.monster?.legText || ''}/>
                         ))}
+                    </div>
+                    <div className={styles.warnContainer} style={{display: warn ? '' : 'none', left: sidebar ? '60%': '50%'}} >
+                        <h1>Are you sure?</h1>
+                        <div className={styles.deleteButton}>
+                            <button className={styles.noBtn} onClick={() => setWarn(false)}>No</button>
+                            <button className={styles.yesBtn} onClick={() => {handleRemove(blockToRemove); setWarn(false)}}>Yes</button>
+                        </div>
                     </div>
                 </div>
             </div>
