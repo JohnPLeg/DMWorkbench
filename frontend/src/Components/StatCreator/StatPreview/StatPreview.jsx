@@ -21,6 +21,7 @@ function StatPreview() {
     const location = useLocation();
     const [monster, setMonster] = useState({});
     const [loading, setLoading] = useState(true);
+    const [loadingPage, setLoadingPage] = useState(false); 
     const [legText, setLegText] = useState("The monster can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The monster regains spent legendary actions at the start of its turn.");
 
 
@@ -149,13 +150,18 @@ function StatPreview() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        loadingPage(true);
 
-        navigate('/stat-creator/editor', { 
-            state: { 
-                monster,
-                legText
-            }
-        })
+        try {
+            navigate('/stat-creator/editor', { 
+                state: { 
+                    monster,
+                    legText
+                }
+            })
+        } finally {
+            loadingPage(false);
+        }
     }
     
     return (
@@ -172,7 +178,12 @@ function StatPreview() {
                             <button className={styles.backbtn} onClick={() => navigate('/stat-select')}>Back</button>
                         </div>
                         <div className={styles.continuebtn}>
-                            <button type="submit" form="statForm" >Continue</button>
+                            <button 
+                                type="submit" 
+                                form="statForm"
+                                disabled={loadingPage} 
+                                style={loadingPage ? { opacity: 0.5, pointerEvents: 'none' } : {}}
+                            >Continue</button>
                         </div>      
                     </div>
                     <form id='statForm' method='POST' onSubmit={handleSubmit}>
