@@ -3,6 +3,37 @@ import { useState } from 'react';
 import Navigation from '../Navigation/Navigation';
 
 function Initiative() {
+    const emptyCreature = {
+        name: '',
+        count: '',
+        health: '',
+        armor_class: ''
+    }
+    
+    function compare(a, b) {
+        if (a.count < b.count) return -1;
+        if (a.count > b.count) return 1;
+        return 0;
+    }
+
+    const handleSort = () => {
+        setMonsterList(prev => (
+            [...prev].sort( compare )
+        ))
+    }
+
+    const handleAdd = () => {
+        setMonsterList(prev => (
+            [...prev, emptyCreature]
+        ))
+    }
+
+    const handleClear = () => {
+        setMonsterList([{
+            emptyCreature
+        }])
+    }
+
     const [monsterList, setMonsterList] = useState([
         {
             name: 'Example',
@@ -69,9 +100,9 @@ function Initiative() {
                 </div>
                 <div className={styles.btnGrid}>
                     <button className={styles.nextInitBtn}>Next</button>
-                    <button className={styles.sortBtn}>Sort</button>
-                    <button className={styles.addCreatureBtn}>Add Creature</button>
-                    <button className={styles.clearOrder}>Clear Order</button>
+                    <button className={styles.sortBtn} onClick={handleSort}>Sort</button>
+                    <button className={styles.addCreatureBtn} onClick={handleAdd}>Add Creature</button>
+                    <button className={styles.clearOrder} onClick={handleClear}>Clear</button>
                     <button className={styles.resetBtn}>Reset Rounds</button>
                 </div>
             </div>
