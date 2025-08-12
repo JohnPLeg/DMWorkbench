@@ -1,0 +1,90 @@
+.trackerContainer {
+    background-color: #2f4f4f;
+    border-radius: 10px;
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.trackerContainer > h4 {
+    color: white;
+}
+
+.creatureName, .creatureCount, .creatureHealth, .creatureAC {
+    background-color: transparent;
+    border-color: #698E8E;
+    border-width: 2px;
+}
+
+.titles {
+    display: grid;
+    grid-template-columns: 52% 15% 11% 15%;
+    margin-left: 6vw;
+    color: white;
+    padding-top: 25px;
+}
+
+.titles * {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.initInputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.creatureName {
+    width: 45%;
+}
+
+.creatureCount {
+    width: 12%;
+}
+
+.creatureHealth {
+    width: 12%;
+}
+
+.creatureAC {
+    width: 12%;
+}
+
+.inputContainer {
+    padding-bottom: 50px;
+}
+
+.btnGrid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.btnGrid * {
+    margin: 20px;
+    background-color: transparent;
+    color: white;
+    font-size: 1vw;
+}
+
+.nextInitBtn, .sortBtn, .addCreatureBtn {
+    border: solid 2px green;
+    transition: 0.2s;
+}
+
+.nextInitBtn:hover, .sortBtn:hover, .addCreatureBtn:hover {
+    background-color: green;
+}
+
+.clearOrder, .resetBtn {
+    border: solid 2px red;
+    transition: 0.2s;
+}
+
+.clearOrder:hover, .resetBtn:hover {
+    background-color: red;
+}

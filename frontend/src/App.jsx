@@ -7,6 +7,7 @@ import Login from './Components/Login/Login'
 import Register from './Components/Login/Register/Register'
 import StatBlockHome from './Components/StatBlockHome/StatblockHome'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
+import Initiative from './Components/Initiative/Initiative'
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
                 <StatBlockHome/>
               </ProtectedRoute>
             }/>
+            <Route path='initiative' element={<Initiative/>}/>
           </Routes>
       </BrowserRouter>
     </>
