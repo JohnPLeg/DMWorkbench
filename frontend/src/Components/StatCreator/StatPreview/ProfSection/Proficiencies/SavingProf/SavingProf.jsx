@@ -6,7 +6,7 @@ function SavingProf({ monster, onSaveSelection }) {
     .map((prof) => prof.proficiency.name.replace('Saving Throw: ', ''));
 
   return (
-    <ul>
+    <ul className={styles.unorderedSaving}>
       {profThrows.length > 0 ? (
         profThrows.map((save) => (
           <li onClick={() => onSaveSelection(save)} key={save}>

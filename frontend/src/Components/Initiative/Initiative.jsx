@@ -20,11 +20,7 @@ function Initiative() {
     }
     const [round, setRound] = useState(0);
     
-    function compare(a, b) {
-        if (a.count < b.count) return -1;
-        if (a.count > b.count) return 1;
-        return 0;
-    }
+    const compare = (a, b) => b.count - a.count;
 
     const handleNext = () => {
         if (monsterList.length > 0) {
@@ -55,7 +51,7 @@ function Initiative() {
 
     const handleSort = () => {
         setMonsterList(prev => (
-            [...prev].sort( compare )
+            [...prev].sort((a, b) => compare(a, b))
         ))
     }
 

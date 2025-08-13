@@ -11,7 +11,7 @@ function SavingProf({ monster, onSkillSelection }) {
 
     return (
         <>
-            <ul>
+            <ul className={styles.unorderedSkills}>
                 {profSkills.map((skill) => (
                     <li onClick={() => onSkillSelection(skill)} key={skill}>{skill || 'test'}</li>
                 ))}

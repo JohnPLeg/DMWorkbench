@@ -6,7 +6,7 @@ function LangProf({ monster, onLangSelection }) {
 
     return (
         <>
-            <ul>
+            <ul className={styles.unorderedLangs}>
                 {langs.length > 0 ? (langs.map((lang) => (
                     <li onClick={() => onLangSelection(lang)} key={lang}>{lang || ''}</li>
                 ))) : <></>}
