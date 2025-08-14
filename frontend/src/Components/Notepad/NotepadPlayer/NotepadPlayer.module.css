@@ -1,0 +1,16 @@
+.noteContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidePage {
+    height: calc(100vh - 70px);
+    width: 15vw;
+    background-color: #222f3e;
+    border-radius: 5px;
+}
+
+.textPage {
+    height: calc(100vh - 70px);
+    width: calc(100% - 15vw);
+}
