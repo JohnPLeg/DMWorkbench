@@ -10,6 +10,8 @@ function Home () {
                 <Navigation/>
                 <h1 className={styles.banner}>DMWorkbench</h1>
                 <h3>A passion project by John Legge</h3>
+                <p>The wesbite is still in development, if you run into any issues contact me at</p>
+                <p>jlegge481@gmail.com</p>
                 <h2 className={styles.scrollButton} onClick={() => {window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" })}}>Begin</h2>
                 <p className={styles.downArrow}>↓</p>
             </div>
