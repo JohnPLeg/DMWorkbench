@@ -1,1 +1,1 @@
-A dnd stat block creator by John Legge
+A dnd tool website by John Legge
