@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import { collection, query, setDoc, getDoc, doc, onSnapshot } from 'firebase/firestore';
+import { collection, query, setDoc, getDoc, doc, onSnapshot, deleteDoc } from 'firebase/firestore';
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
 import Navigation from '../../Navigation/Navigation';
@@ -10,6 +10,8 @@ function NotepadPlayer() {
     const auth = getAuth();
     const editorRef = useRef(null);
     const saveTimeout = useRef(null);
+    const [editingFileId, setEditingFileId] = useState(null);
+    const [fileNameDraft, setFileNameDraft] = useState("");
     const [activeFile, setActiveFile] = useState(null);
     const [files, setFiles] = useState([]);
 
@@ -55,6 +57,8 @@ function NotepadPlayer() {
                 }
             }
         }
+
+        activeFileChange();
     }, [activeFile])
 
     // runs when the user swaps files saving the previous file
@@ -62,9 +66,7 @@ function NotepadPlayer() {
         if (editorRef.current && activeFile) {
             const content = editorRef.current.getContent();
 
-            await setDoc(doc(db, 'users', auth.currentUser.uid, 'notes', activeFile), {
-                content
-            });
+            await setDoc(doc(db, 'users', auth.currentUser.uid, 'notes', activeFile), { content }, { merge: true });
         }
 
         setActiveFile(fileId);
@@ -93,34 +95,124 @@ function NotepadPlayer() {
             <div className={styles.noteContainer}>
                 <div className={styles.sidePage}>
                     {files.map((file) => (
-                        <div key={file.id}>{file.id}</div>
+                        <div key={file.id} className={styles.fileRow} style={{backgroundColor: activeFile === file.id ? 'rgba(255,255,255,0.2)' : ''}}>
+                            {editingFileId === file.id ? (
+                                <input
+                                    value={fileNameDraft}
+                                    onChange={(e) => setFileNameDraft(e.target.value)}
+                                    onBlur={async () => {
+                                        // Save new name to Firestore
+                                        const fileDocRef = doc(db, 'users', auth.currentUser.uid, 'notes', file.id);
+                                        await setDoc(fileDocRef, { name: fileNameDraft }, { merge: true });
+
+                                        setEditingFileId(null);
+                                    }}
+                                    onKeyDown={async (e) => {
+                                        if (e.key === "Enter") {
+                                        e.target.blur(); // triggers onBlur save
+                                        }
+                                    }}
+                                    autoFocus
+                                />
+                            ) : (
+                                <>
+                                    <span
+                                        onClick={() => switchFile(file.id)}
+                                        className={styles.fileName}
+                                    >
+                                        {file.name}
+                                    </span>
+                                    <button
+                                        className={styles.editButton}
+                                        onClick={() => {
+                                        setEditingFileId(file.id);
+                                        setFileNameDraft(file.name);
+                                        }}
+                                    >
+                                        ✎
+                                    </button>
+                                    <button
+                                        className={styles.deleteButton}
+                                        onClick={async () => {
+                                            // Ask for confirmation
+                                            const confirmDelete = window.confirm(`Are you sure you want to delete "${file.name}"?`);
+                                            if (!confirmDelete) return;
+
+                                            // Delete the file in Firestore
+                                            const fileDocRef = doc(db, 'users', auth.currentUser.uid, 'notes', file.id);
+                                            await deleteDoc(fileDocRef);
+
+                                            // If the deleted file is currently active, pick a new active file
+                                            if (activeFile === file.id) {
+                                            const remainingFiles = files.filter(f => f.id !== file.id);
+                                            setActiveFile(remainingFiles[0]?.id || null);
+                                            }
+                                        }}
+                                        >
+                                        X
+                                    </button>
+                                </>
+                            )}
+                        </div>
                     ))}
                 </div>
                 <div className={styles.textPage}>
                     <Editor
                         onInit={(evt, editor) => editorRef.current = editor}
                         apiKey='jdmuxmqdq6l2cdavojhkp4wuzjhdwgd0aezgdbg51eheo17c'
+                        onKeyUp={handleTyping}
                         init={{
+                            promotion: false,
+                            onboarding: false,
                             skin: 'oxide-dark',
                             content_css: 'dark',
-                            resize: false,
                             height: '100%',
+                            menubar: true,
+                            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                             plugins: [
                             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                             'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
                             ],
-                            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                            tinycomments_mode: 'embedded',
-                            tinycomments_author: 'Author name',
-                            mergetags_list: [
-                            { value: 'First.Name', title: 'First Name' },
-                            { value: 'Email', title: 'Email' },
-                            ],
-                            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-                            uploadcare_public_key: '43b6f1606ad72a669bda',
-                            onboarding: false,
-                            promotion: false,
+                            menu: {
+                            file: { title: 'File', items: 'customnewdocument | preview | print' }
+                            },
+                            setup: (editor) => {
+                            editor.on('init', () => {
+                                console.log("Editor initialized");
+
+                                // Custom New Document menu item
+                                editor.ui.registry.addMenuItem('customnewdocument', {
+                                text: 'New Document',
+                                onAction: async () => {
+                                    // Save current file first
+                                    if (editorRef.current && activeFile) {
+                                    const content = editorRef.current.getContent();
+                                    await setDoc(
+                                        doc(db, 'users', auth.currentUser.uid, 'notes', activeFile),
+                                        { content },
+                                        { merge: true }
+                                    );
+                                    }
+
+                                    // Create new Firestore file
+                                    const newDocRef = doc(collection(db, "users", auth.currentUser.uid, "notes"));
+                                    const newFile = {
+                                    name: "Untitled File",
+                                    content: "<p>Start writing...</p>"
+                                    };
+                                    await setDoc(newDocRef, newFile);
+
+                                    // Update state
+                                    setActiveFile(newDocRef.id);
+
+                                    // Load content into editor
+                                    editor.setContent(newFile.content);
+                                    console.log("New Document created:", newDocRef.id);
+                                }
+                                });
+                            });
+                            }
                         }}
                         initialValue="<p>Fetching text...</p>"
                     />
