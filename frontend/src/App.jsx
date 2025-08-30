@@ -8,7 +8,6 @@ import Register from './Components/Login/Register/Register'
 import StatBlockHome from './Components/StatBlockHome/StatblockHome'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import Initiative from './Components/Initiative/Initiative'
-import NotepadPlayer from './Components/Notepad/NotepadPlayer/NotepadPlayer'
 
 function App() {
 
@@ -40,11 +39,6 @@ function App() {
               </ProtectedRoute>
             }/>
             <Route path='initiative' element={<Initiative/>}/>
-            <Route path ='notepad-player' element={
-              <ProtectedRoute>
-                <NotepadPlayer/>
-              </ProtectedRoute>
-            }/>
           </Routes>
       </BrowserRouter>
     </>

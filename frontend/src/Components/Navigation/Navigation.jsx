@@ -23,7 +23,6 @@ function Navigation() {
       <Link to="/stat-select" className={styles.navLink}>Stat Blocks</Link>
       <Link to='/stat-block-home' className={styles.navLink}>Dashboard</Link>
       <Link to='/initiative' className={styles.navLink}>Initiative Tracker</Link>
-      <Link to='/notepad-player' className={styles.navLink}>Notepad</Link>
       {user ? <nav onClick={handleLogout} className={styles.navLink}>Logout</nav> : ''}
     </nav>
   );
