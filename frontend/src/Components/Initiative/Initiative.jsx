@@ -44,6 +44,9 @@ function Initiative() {
     }
 
     const handleRemove = (idx) => {
+        if (monsterList.length - 1 === idx && idx === highlighted) {
+            setHighlighted(0);
+        }
         setMonsterList(prev => (
             prev.filter((_, index) => index !== idx)
         ))
