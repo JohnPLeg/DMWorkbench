@@ -92,3 +92,41 @@
 .roundNum h1 {
     font-size: 4vw;
 }
+
+.creatureHealth {
+    position: relative;
+}
+
+.incrementHealth {
+    grid-template-columns: 5fr 2fr;
+    display: grid;
+    position: absolute;
+    z-index: 1;
+    visibility: hidden;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.incrementHealth input {
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+}
+
+.incrementHealth:focus, .creatureHealth:focus-within .incrementHealth {
+    opacity: 1;
+    visibility: visible;
+}
+
+.crement {
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    height: 50%;
+    user-select: none;
+}
+
+.crement:hover {
+    background-color: hsl(0, 0%, 83%);
+    border-radius: 5px;
+}

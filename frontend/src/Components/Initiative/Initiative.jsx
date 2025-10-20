@@ -12,6 +12,7 @@ function Initiative() {
         }
     ]);
     const [highlighted, setHighlighted] = useState(-1)
+    const [increment, setIncrement] = useState(0)
     const emptyCreature = {
         name: '',
         count: '',
@@ -81,6 +82,28 @@ function Initiative() {
         )))
     }
 
+    const incrementBy = (newValue, idxToUpdate, field) => {
+        setMonsterList(prevList => (
+            prevList.map((creature, index) => (
+                index === idxToUpdate ? {
+                    ...creature,
+                    [field]: Number(creature.health) + Number(newValue)
+                } : creature
+            )
+        )))
+    }
+
+    const decrementBy = (newValue, idxToUpdate, field) => {
+        setMonsterList(prevList => (
+            prevList.map((creature, index) => (
+                index === idxToUpdate ? {
+                    ...creature,
+                    [field]: Number(creature.health) - Number(newValue)
+                } : creature
+            )
+        )))
+    }
+
     return (
         <>
             <Navigation/>
@@ -108,13 +131,30 @@ function Initiative() {
                                 onChange={(e) => handleUpdate(e.target.value, index, 'count')}
                                 className={styles.creatureCount}
                             />
-                            <input 
-                                type="number" 
-                                value={creature.health} 
-                                placeholder='0'
-                                onChange={(e) => handleUpdate(e.target.value, index, 'health')}
-                                className={styles.creatureHealth}
-                            />
+                            <div className={styles.creatureHealth}>
+                                <input 
+                                    type="number" 
+                                    value={creature.health} 
+                                    placeholder='0'
+                                    onChange={(e) => handleUpdate(e.target.value, index, 'health')}
+                                    className={styles.creatureHealth}
+                                />
+                                <div className={styles.incrementHealth} tabIndex="-1">
+                                    <div>
+                                        <input type="number" value={increment} onChange={(e) => setIncrement(e.target.value)}/>
+                                    </div>
+                                    <div>
+                                        <div 
+                                            className={styles.crement}
+                                            onClick={() => incrementBy(increment, index, 'health')}
+                                        >+</div>
+                                        <div 
+                                            className={styles.crement}
+                                            onClick={() => decrementBy(increment, index, 'health')}
+                                        >-</div>
+                                    </div>
+                                </div>
+                            </div>
                             <input 
                                 type="number" 
                                 value={creature.armor_class} 
