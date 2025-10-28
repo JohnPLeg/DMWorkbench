@@ -1,4 +1,5 @@
 import styles from './StatBlock.module.css'
+import { crProf } from '../../../../Data/dropdownInfo';
 
 function StatBlock({ monster, legText }) {
     const calcPassivePerception = () => {
