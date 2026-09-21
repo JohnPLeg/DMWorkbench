@@ -1,132 +1,48 @@
-.trackerContainer {
-    background-color: #2f4f4f;
-    border-radius: 10px;
-    width: 60vw;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-}
-
-.trackerContainer > h4 {
-    color: white;
-}
-
-.creatureName, .creatureCount, .creatureHealth, .creatureAC {
-    background-color: transparent;
-    border-color: #698E8E;
-    border-width: 2px;
-}
-
-.gridRow {
-  display: grid;
-  grid-template-columns: 52% 16% 16% 16% 10%;
-  align-items: center;
-  width: 75%;
-  max-width: 100%;
-  margin: 0 auto;
-  color: white;
-  height: 50px;
-}
-
-.gridRow button {
-    background-color: rgba(255, 0, 0, 0.75);
-    color: white;
-    border: solid 2px #698E8E;
-}
-
-.inputContainer {
-    padding-bottom: 50px;
-}
-
-.btnGrid {
+.initHeader {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
-    margin-right: 50px;
-    margin-left: 50px;
+    align-items: center;
+    background-color: #232a33;
+    border: 1px solid black;
+    height: 75px;
 }
 
-.btnGrid * {
-    margin: 20px;
-    background-color: transparent;
+.inline {
+    display: flex;
+    align-items: center;
+}
+
+.btnGreen, .hollowBtn {
+    height: fit-content;
+    border: 2px solid #3e424b;
+    transition: 0.15s;
+    border-radius: 5px;
+    margin: 0px 50px;
+}
+
+.btnGreen {
+    background-color: #31ce90;
+    color: black;
+}
+
+.btnGreen:hover {
+    border: 2px solid white;
+}
+
+.hollowBtn, .inline{
+    background: transparent;
     color: white;
-    font-size: 1vw;
+
 }
 
-.btnGrid button {
-    height: 8vh;
+.hollowBtn:hover {
+    background-color: darkred;
 }
 
-.nextInitBtn, .sortBtn, .addCreatureBtn {
-    border: solid 2px green;
-    transition: 0.2s;
+.inline {
+    font-size: 2rem;
 }
 
-.nextInitBtn:hover, .sortBtn:hover, .addCreatureBtn:hover {
-    background-color: green;
-}
-
-.clearOrder, .resetBtn {
-    border: solid 2px red;
-    transition: 0.2s;
-}
-
-.clearOrder:hover, .resetBtn:hover {
-    background-color: red;
-}
-
-.roundNum {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.roundNum h1,
-.roundNum h2 {
-  margin: 0;
-  line-height: 1;
-}
-
-.roundNum h1 {
-    font-size: 4vw;
-}
-
-.creatureHealth {
-    position: relative;
-}
-
-.incrementHealth {
-    grid-template-columns: 5fr 2fr;
-    display: grid;
-    position: absolute;
-    z-index: 1;
-    visibility: hidden;
-    background-color: white;
-    border-radius: 5px;
-}
-
-.incrementHealth input {
-    background-color: white;
-    border-radius: 5px;
-    color: black;
-}
-
-.incrementHealth:focus, .creatureHealth:focus-within .incrementHealth {
-    opacity: 1;
-    visibility: visible;
-}
-
-.crement {
-    text-align: center;
-    color: black;
-    cursor: pointer;
-    height: 50%;
-    user-select: none;
-}
-
-.crement:hover {
-    background-color: hsl(0, 0%, 83%);
-    border-radius: 5px;
+.alignHeader {
+    width: 12vw;
 }

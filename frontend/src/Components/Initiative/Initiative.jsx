@@ -107,75 +107,21 @@ function Initiative() {
     return (
         <>
             <Navigation/>
-            <div className={styles.trackerContainer}>
-                <div className={styles.gridRow}>
-                    <h4>Name:</h4>
-                    <h4>Initiative:</h4>
-                    <h4>Health:</h4>
-                    <h4>Armor Class:</h4>
+            <div className={styles.initHeader}>
+                <button className={styles.btnGreen}>Next Turn</button>
+                <div className={styles.inline}>
+                    <div className={styles.alignHeader}/>
+                    <p className={styles.pBold}>Round {round}</p>
+                    <button className={styles.hollowBtn}>Reset Rounds</button>
                 </div>
-                <div className={styles.inputContainer}>
-                    {monsterList.length > 0 && monsterList.map((creature, index) => (
-                        <div className={styles.gridRow} key={index} style={{backgroundColor: highlighted === index ? 'rgba(47, 99, 79, 1)' : ''}}>
-                            <input 
-                                type='text' 
-                                value={creature.name} 
-                                placeholder='Creature Name...'
-                                onChange={(e) => handleUpdate(e.target.value, index, 'name')}
-                                className={styles.creatureName}
-                            />
-                            <input 
-                                type="number" 
-                                value={creature.count} 
-                                placeholder='0'
-                                onChange={(e) => handleUpdate(e.target.value, index, 'count')}
-                                className={styles.creatureCount}
-                            />
-                            <div className={styles.creatureHealth}>
-                                <input 
-                                    type="number" 
-                                    value={creature.health} 
-                                    placeholder='0'
-                                    onChange={(e) => handleUpdate(e.target.value, index, 'health')}
-                                    className={styles.creatureHealth}
-                                />
-                                <div className={styles.incrementHealth} tabIndex="-1">
-                                    <div>
-                                        <input type="number" value={increment} onChange={(e) => setIncrement(e.target.value)}/>
-                                    </div>
-                                    <div>
-                                        <div 
-                                            className={styles.crement}
-                                            onClick={() => incrementBy(increment, index, 'health')}
-                                        >+</div>
-                                        <div 
-                                            className={styles.crement}
-                                            onClick={() => decrementBy(increment, index, 'health')}
-                                        >-</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <input 
-                                type="number" 
-                                value={creature.armor_class} 
-                                placeholder='0'
-                                onChange={(e) => handleUpdate(e.target.value, index, 'armor_class')}
-                                className={styles.creatureAC}
-                            />
-                            <button onClick={() => handleRemove(index)}>X</button>
-                        </div>
-                    ))}
+                <button className={styles.hollowBtn}>Clear All</button>
+            </div>
+            <div className={styles.initBody}>
+                <div className={styles.initList}>
+
                 </div>
-                <div className={styles.btnGrid}>
-                    <button className={styles.nextInitBtn} onClick={handleNext}>Next</button>
-                    <button className={styles.sortBtn} onClick={handleSort}>Sort</button>
-                    <button className={styles.addCreatureBtn} onClick={handleAdd}>Add Creature</button>
-                    <button className={styles.clearOrder} onClick={handleClear}>Clear</button>
-                    <button className={styles.resetBtn} onClick={handleRoundReset}>Reset Rounds</button>
-                    <div className={styles.roundNum}>
-                        <h2>Round:</h2>
-                        <h1>{round}</h1>
-                    </div>
+                <div className={styles.initCreate}>
+
                 </div>
             </div>
         </>
