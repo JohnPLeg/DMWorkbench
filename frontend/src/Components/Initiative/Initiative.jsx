@@ -105,11 +105,11 @@ function Initiative() {
     }
 
     return (
-        <>
+        <div className={styles.initContainer}>
             <Navigation/>
             <div className={styles.initHeader}>
                 <button className={styles.btnGreen}>Next Turn</button>
-                <div className={styles.inline}>
+                <div className={styles.center}>
                     <div className={styles.alignHeader}/>
                     <p className={styles.pBold}>Round {round}</p>
                     <button className={styles.hollowBtn}>Reset Rounds</button>
@@ -118,13 +118,37 @@ function Initiative() {
             </div>
             <div className={styles.initBody}>
                 <div className={styles.initList}>
-
+                    <div className={styles.placeholder}/>
                 </div>
                 <div className={styles.initCreate}>
-
+                    <div>
+                        <label htmlFor="">Name</label>
+                        <input type="text" placeholder='e.g. Goblin, Orc' />
+                    </div>
+                    <div className={styles.inputGrid}>
+                        <div>
+                            <label htmlFor="">Initiative</label>
+                            <input type="number" placeholder='0'/>
+                        </div>
+                        <div>
+                            <label htmlFor="">Health</label>
+                            <input type="number" placeholder='0'/>
+                        </div>
+                    </div>
+                    <div>
+                        <label htmlFor="">Armor Class</label>
+                        <input type="number" placeholder='0'/>
+                    </div>
+                    <div className={styles.centerBtn}>
+                        <button className={styles.btnGreen}>Add to List</button>
+                    </div>
+                    <div className={styles.inline}>
+                        <input type="checkbox" />
+                        <label htmlFor="">Create Group</label>
+                    </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

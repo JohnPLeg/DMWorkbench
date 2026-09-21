@@ -1,3 +1,9 @@
+.initContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .initHeader {
     display: flex;
     justify-content: space-between;
@@ -7,9 +13,10 @@
     height: 75px;
 }
 
-.inline {
+.center {
     display: flex;
     align-items: center;
+    font-size: 2rem;
 }
 
 .btnGreen, .hollowBtn {
@@ -23,13 +30,14 @@
 .btnGreen {
     background-color: #31ce90;
     color: black;
+    width: 125px;
 }
 
 .btnGreen:hover {
     border: 2px solid white;
 }
 
-.hollowBtn, .inline{
+.hollowBtn, .center{
     background: transparent;
     color: white;
 
@@ -39,10 +47,45 @@
     background-color: darkred;
 }
 
-.inline {
-    font-size: 2rem;
-}
-
 .alignHeader {
     width: 12vw;
+}
+
+.initBody {
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.initList {
+    background-color: white;
+    height: 100px;
+}
+
+.inputGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 20px 0px;
+    gap: 20px;
+}
+
+.initCreate {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    background-color: #232a33;
+    flex-grow: 1;
+}
+
+.centerBtn {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.inline * {
+    display: inline;
+    padding: 0px 0px 0px 20px;
+    width: fit-content;
 }
