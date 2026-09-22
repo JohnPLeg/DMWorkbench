@@ -1,0 +1,221 @@
+.card {
+    background-color: #232a33;
+    border: 1px solid #3e424b;
+    border-radius: 8px;
+    color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+    background-color: #2b343f;
+    border-color: #5a6270;
+    transform: scale(1.01);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.init {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.name {
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.acChip {
+    border: 2px solid #3e424b;
+    border-radius: 5px;
+    padding: 2px 8px;
+    color: white;
+}
+
+.countBadge {
+    background-color: #3e424b;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.chevron {
+    font-size: 1rem;
+    color: #4ade80;
+    transition: transform 0.15s ease;
+}
+
+.chevronOpen {
+    transform: rotate(90deg);
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hpText {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+
+.track {
+    position: relative;
+    width: 100%;
+    height: 12px;
+    background-color: #1e1e2e;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.redBar, .greenBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.redBar {
+    background-color: #ef4444;
+    transition: width 0.55s ease;
+}
+
+.greenBar {
+    background-color: #4ade80;
+    transition: width 0.18s ease;
+}
+
+.isTurn {
+    box-shadow: inset 6px 0 0 0 #f59e0b, inset 0 0 0 2px #f59e0b;
+}
+
+.isTurn.selected {
+    box-shadow: inset 6px 0 0 0 #f59e0b, inset 0 0 0 2px #3b82f6;
+}
+
+.turnTag {
+    background-color: #f59e0b;
+    color: black;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.selected {
+    box-shadow: inset 0 0 0 2px #3b82f6;
+}
+
+.members {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid #3e424b;
+    padding-top: 10px;
+}
+
+.member {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+    padding: 6px 8px;
+    cursor: pointer;
+    background-color: #1e1e2e;
+}
+
+.member:hover {
+    background-color: #2a3040;
+}
+
+.memberSelected {
+    background-color: rgba(59, 130, 246, 0.18);
+}
+
+.memberName {
+    width: 140px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.85rem;
+}
+
+.memberTrack {
+    flex: 1;
+    height: 8px;
+    background-color: #3e424b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.memberBar {
+    height: 100%;
+    background-color: #4ade80;
+    border-radius: 10px;
+}
+
+.memberHp {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #cbd5e1;
+    white-space: nowrap;
+}
+
+.memberTrash {
+    border: none;
+    background: transparent;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.memberTrash:hover {
+    color: white;
+}
+
+.trash {
+    border: 2px solid #3e424b;
+    border-radius: 5px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.trash:hover {
+    background-color: darkred;
+}
